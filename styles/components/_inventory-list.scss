@@ -1,0 +1,21 @@
+.inventory-list {
+  padding: 0 1rem;
+
+  &-top-row {
+    display: flex;
+    padding: 1rem 0;
+    align-items: center;
+    gap: 0.5rem;
+
+    .current-location {
+      display: inline-block;
+      font-size: 1.5rem;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+
+    .add-new-btn {
+      margin-left: auto;
+    }
+  }
+}

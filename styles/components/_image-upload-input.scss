@@ -1,0 +1,77 @@
+.image-upload {
+  &-wrapper {
+    position: relative;
+    display: flex;
+    padding: 0.5rem;
+
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    position: relative;
+    border: 1px solid $gray-600;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: border 0.2s ease;
+    &:hover {
+      border: 1px solid $gray-200;
+    }
+  }
+  &-input {
+    background-color: $gray-800;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    // width: 150px;
+    // font-size: 2rem;
+
+    // border-radius: 5px;
+    padding: 30px 0;
+    cursor: pointer;
+    // transition: border 0.2s ease;
+
+    // &:hover {
+    //   border: 1px solid $gray-200;
+    // }
+
+    .icon {
+      width: 8rem;
+      height: 8rem;
+      fill: $pr-punch;
+      // margin-left: 0.5rem;
+    }
+
+    .label-text {
+      min-width: 10ch;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $pr-navy;
+    }
+  }
+}
+
+.img-upload-preview {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 250px;
+  width: 250px;
+}
+
+.select-other-img {
+  position: absolute;
+  // min-width: 15ch;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  // width: 100%;
+  text-align: center;
+  // left: 50%;
+  // transform: translateX(-50%);
+  padding: 0.5rem;
+  background-color: $gray-200;
+  cursor: pointer;
+  color: #fff;
+}

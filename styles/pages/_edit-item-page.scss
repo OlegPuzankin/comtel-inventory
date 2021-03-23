@@ -1,0 +1,113 @@
+.edit-item {
+  max-width: 990px;
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+
+  &-form {
+    margin-top: 3rem;
+  }
+
+  .row {
+    display: flex;
+    gap: 0.75rem;
+    // border: 1px solid black;
+    // justify-content: space-between;
+  }
+
+  .image-col {
+    margin-top: 1rem;
+    position: relative;
+
+    & span {
+      position: absolute;
+      border-radius: 10px;
+      z-index: 5;
+      left: 10px;
+      top: -10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2px;
+      color: $gray-200;
+      top: -0.5rem;
+      left: 1rem;
+      padding: 0 0.5rem;
+      background-color: #fff;
+    }
+  }
+
+  .item-img {
+    // position: relative;
+    display: flex;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 400px;
+    width: 400px;
+    border: 1px solid $gray-200;
+    border-radius: 5px;
+
+    &:hover .delete-img-btn {
+      display: flex;
+      opacity: 0.9;
+    }
+
+    .delete-img-btn {
+      display: none;
+      margin: 0 auto;
+      opacity: 0;
+      color: #fff;
+      border-radius: 50px;
+
+      // position: absolute;
+      // top: 10px;
+      // left: 50%;
+      // transform: translateX(-50%);
+      padding: 0.75rem;
+      background-color: $gray-200;
+      cursor: pointer;
+      transition: all 0.5s ease-in;
+    }
+  }
+
+  .msg {
+    width: 100%;
+    // margin: 0 auto;
+    border-radius: 5px;
+    position: absolute;
+    top: -2.5rem;
+    padding: 0.75rem;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    background-color: rgb(195, 161, 219);
+    z-index: 5;
+    transform: translate(0, 0);
+    animation: show 0.5s;
+  }
+}
+.loader-container {
+  position: absolute;
+
+  top: 15rem;
+  display: flex;
+  // height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    // transform: translateX(50%);
+    transform: translate(0, 10px);
+  }
+
+  to {
+    opacity: 1;
+    // transform: translateX(50%);
+    transform: translate(0, 0);
+  }
+}

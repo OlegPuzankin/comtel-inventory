@@ -1,0 +1,58 @@
+.select-wrapper {
+  position: relative;
+  margin-top: 1rem;
+  // display: inline-block;
+  // width: 250px;
+
+  & .select {
+    width: 100%;
+    font-family: inherit;
+    padding: 0.5em 0.9em;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgb(238, 239, 246);
+    transition: all 0.2s ease;
+
+    &:focus,
+    &:hover {
+      border-color: rgb(79, 83, 102);
+      cursor: pointer;
+    }
+  }
+
+  & .select.error {
+    border: 1px solid rgb(255, 0, 0);
+
+    & + .label {
+      color: rgb(255, 0, 0);
+    }
+  }
+
+  & .label {
+    position: absolute;
+    color: rgb(79, 83, 102);
+    left: 10px;
+    top: -10px;
+    background-color: #fff;
+    padding: 0 0.5em;
+    font-size: 0.8em;
+    letter-spacing: 0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & .error-text {
+    display: block;
+    min-height: 1rem;
+    padding-left: 0.25rem;
+    color: rgb(255, 0, 0);
+    font-size: 0.7rem;
+    // line-height: 1.5;
+    // line-height: 0.8;
+  }
+}
+
+// .text-input {
+// }

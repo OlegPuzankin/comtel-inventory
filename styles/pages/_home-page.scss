@@ -1,0 +1,19 @@
+.layout {
+  display: flex;
+  min-height: 92vh;
+}
+
+.locations {
+  color: #fff;
+  background-color: $pr-ocean;
+  min-width: 25%;
+  height: 92vh;
+  // padding: 1rem 0.5em;
+}
+
+.items {
+  background-color: $gray-800;
+  // background-color: rgba($pr-warm, 0.5);
+  height: 92vh;
+  min-width: 75%;
+}

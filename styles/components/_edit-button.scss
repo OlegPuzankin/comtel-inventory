@@ -1,0 +1,23 @@
+.edit-button {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem 0.5rem;
+  background-color: $pr-navy;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: all 0.2s;
+  }
+
+  &:hover &-icon {
+    transform: rotateZ(45deg);
+  }
+}

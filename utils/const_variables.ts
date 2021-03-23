@@ -1,0 +1,1 @@
+export const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'

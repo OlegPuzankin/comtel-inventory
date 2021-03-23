@@ -1,0 +1,54 @@
+@import "../base/colors";
+
+.text-input-wrapper {
+  position: relative;
+  margin-top: 1rem;
+  // display: inline-block;
+  // width: 250px;
+
+  & .input {
+    width: 100%;
+    font-family: inherit;
+    padding: 0.5em 0.9em;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid $gray-600;
+    transition: all 0.2s ease;
+
+    &:focus,
+    &:hover {
+      border-color: $gray-200;
+    }
+  }
+
+  & .input.error {
+    border: 1px solid $pr-punch;
+
+    & + .label {
+      color: $pr-punch;
+    }
+  }
+
+  & .label {
+    position: absolute;
+    color: $gray-200;
+    left: 10px;
+    top: -10px;
+    background-color: #fff;
+    padding: 0 0.5em;
+    font-size: 0.8em;
+    letter-spacing: 0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & .error-text {
+    display: block;
+    min-height: 1rem;
+    padding-left: 0.25rem;
+    color: $pr-punch;
+    font-size: 0.7rem;
+  }
+}

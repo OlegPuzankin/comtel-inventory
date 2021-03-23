@@ -1,0 +1,28 @@
+.location-list {
+  .all-items {
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    // justify-content: space-between;
+    &-selected {
+      // color: purple;
+      background-color: $pr-warm;
+      // font-weight: 700;
+      // text-decoration: underline;
+    }
+  }
+
+  &-entries {
+    margin-right: 0.5rem;
+  }
+
+  .open-folder-icon {
+    width: 1.5rem;
+    // height: auto;
+    margin-right: 1rem;
+  }
+}

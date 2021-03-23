@@ -1,0 +1,14 @@
+.custom-checkbox {
+  width: 100%;
+  height: 100%;
+  color: hsl(0, 0%, 60%);
+  // background-color: darkkhaki;
+  &:hover {
+    color: hsl(0, 0%, 25%);
+  }
+
+  &-checked {
+    color: $pr-ocean;
+    // background-color: rgba($color: $primary-blue, $alpha: 0.8);
+  }
+}
