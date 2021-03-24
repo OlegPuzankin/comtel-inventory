@@ -1,12 +1,14 @@
 import Link from 'next/link';
-import { signIn, signin, signout, useSession } from 'next-auth/client';
+import { signIn, signout, useSession } from 'next-auth/client';
 import { GoogleIcon } from './icons/google-icon';
 
 const Header = () => {
   const [session, loading] = useSession();
 
+
+
   function signGoogle() {
-    signin('google', { callbackUrl: 'http://localhost:3000' })
+    signIn('google', { callbackUrl: 'https://comtel-inventory.vercel.app' })
   }
 
   function signOut() {
