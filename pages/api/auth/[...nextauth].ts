@@ -41,6 +41,9 @@ const options: InitOptions = {
       session.user.admin = _user.admin
       return session
     },
+    async redirect() {
+      return 'https://comtel-inventory.vercel.app'
+    },
   },
 
   session: {
@@ -48,6 +51,8 @@ const options: InitOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
     updateAge: 24 * 60 * 60, // 24 hours
   },
+
+
 
   jwt: {
     secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',

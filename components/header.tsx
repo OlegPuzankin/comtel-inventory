@@ -8,7 +8,7 @@ const Header = () => {
 
 
   function signGoogle() {
-    signIn('google', { callbackUrl: 'https://comtel-inventory.vercel.app' })
+    signIn('google')
   }
 
   function signOut() {
