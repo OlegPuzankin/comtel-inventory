@@ -14,7 +14,6 @@ async function dbConnect() {
       useCreateIndex: true,
     })
   } else {
-    console.log('local db');
 
     return mongoose.connect(process.env.LOCAL_DATABASE_URL, {
       useNewUrlParser: true,

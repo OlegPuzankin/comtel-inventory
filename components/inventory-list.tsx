@@ -103,6 +103,7 @@ export function InventoryList() {
       })
   }
   function showMoveButton() {
+    //@ts-ignore
     if (selectedItems.length > 0 && session?.user.admin) {
       return true
     }
@@ -120,6 +121,7 @@ export function InventoryList() {
   }
 
   function showChangeStatusOrResponsible() {
+    //@ts-ignore
     if (selectedItems.length > 0 && session?.user.admin)
       return true
     else
