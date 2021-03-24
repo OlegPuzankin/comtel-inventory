@@ -54,6 +54,7 @@ export function RowAllToolsTable({ item }: Props) {
 
     if (selectedLocation?.locationType === 'stock')
       return true
+    //@ts-ignore
     else if (selectedLocation?.locationType === 'location' && session?.user.admin)
       return true
 
