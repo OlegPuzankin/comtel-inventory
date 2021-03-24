@@ -19,10 +19,11 @@ export function ItemsLocationTable({ items }: Props) {
 
 
   function showCheckBox() {
-    if (!session?.user.admin)
-      return false
-    else
+    //@ts-ignore
+    if (session?.user.admin)
       return true
+    else
+      return false
   }
 
   const memoShowCheckBox = React.useMemo(showCheckBox, [session])
