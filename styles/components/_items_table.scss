@@ -1,4 +1,5 @@
 .items-table {
+  // header styles
   .header {
     // position: relative;
     // height: 50px;
@@ -23,6 +24,8 @@
       justify-content: start;
     }
   }
+
+  // row styles
   .row {
     position: relative;
     background-color: #fff;
@@ -50,6 +53,8 @@
 
     .item {
       justify-content: unset;
+      cursor: pointer;
+
       &-img {
         margin-left: 1rem;
         display: flex;

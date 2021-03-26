@@ -35,7 +35,7 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox 
   return (
     <div className={cn('row', { 'selected': selected })}>
 
-      <div className='item flex-40'>
+      <div className='item flex-40' onClick={navigateToEditPage}>
         {showCheckBox &&
           <div className='checkbox'>
             <input type='checkbox' checked={selected} onChange={() => handleCheckBox(selected, item)} />
@@ -50,7 +50,7 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox 
             </div>
         }
 
-        <span onClick={navigateToEditPage} className='item-txt'>
+        <span className='item-txt'>
           {item.name}
         </span>
 

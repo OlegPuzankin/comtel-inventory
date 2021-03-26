@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { ItemStatus, ItemType, MenuItem } from '../interfaces/common_interfaces';
+import { ItemStatus, ItemType, LocationType, MenuItem } from '../interfaces/common_interfaces';
 import { Item, ItemDoc } from '../model/Item';
 import { useGetItems, useGetLocations, useGetUsers } from '../hooks/swr';
 import { RowLocationTable } from './row-location-table';
@@ -121,8 +121,10 @@ export function InventoryList() {
   }
 
   function showChangeStatusOrResponsible() {
+    if (selectedLocation?.locationType === LocationType.Stock)
+      return false
     //@ts-ignore
-    if (selectedItems.length > 0 && session?.user.admin)
+    else if (selectedItems.length > 0 && session?.user.admin)
       return true
     else
       return false

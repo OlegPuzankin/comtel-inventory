@@ -41,9 +41,6 @@ const options: InitOptions = {
       session.user.admin = _user.admin
       return session
     },
-    async redirect() {
-      return 'https://comtel-inventory.vercel.app'
-    },
   },
 
   session: {

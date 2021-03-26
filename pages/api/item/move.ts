@@ -6,7 +6,7 @@ import { Item } from '../../../model/Item'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client';
 import { User } from '../../../model/User';
-import { ItemStatus } from '../../../interfaces/common_interfaces';
+import { ItemStatus, LocationType } from '../../../interfaces/common_interfaces';
 
 
 
@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       description: await getMoveHistoryDescription(body.selectedItemsId, body.locationId)
     })
 
+    await history.save()
 
     const data = await Item.updateMany(
       { '_id': { $in: body.selectedItemsId } },
@@ -36,7 +37,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date()
       });
 
-    await history.save()
     res.status(200).json({ success: true, data })
   } catch (error) {
     res.status(400).json({ success: false })
@@ -46,13 +46,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 async function getMoveHistoryDescription(itemsId: Array<string>, locationId: string) {
   const items = await Item.find({ '_id': { $in: itemsId } }).populate('location')
-  const loc = await Location.findById(locationId)
+  const destinationLocation = await Location.findById(locationId)
+  console.log('dest', destinationLocation.name);
+  console.log('source', items[0].location.name);
+  console.log('destinationLocation', destinationLocation.locationType);
 
-  const _items = items.map(i => {
-    return `${i.name} from  ${i.location.name}`
+
+  const text = ['Iнструмент ']
+
+
+
+  text[1] = items.map(i => {
+    return `${i.name}`
   }).join(', ')
 
+  if (destinationLocation.locationType === 'stock')
+    text.push(`повернуто з ${items[0].location.name} ${new Date().toLocaleDateString()}.`)
+  if (destinationLocation.locationType === 'location')
+    text.push(`переміщено на ${destinationLocation.name} ${new Date().toLocaleDateString()}.`)
 
-  return `Items ${_items} was moved to ${loc.name}`
+  return text.join(' ')
 
 }
