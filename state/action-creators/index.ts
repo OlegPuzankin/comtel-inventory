@@ -2,6 +2,7 @@ import { LocationDoc } from './../../model/Location';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 import { ItemDoc } from '../../model/Item';
+import { LoggedUser } from '../../interfaces/common_interfaces';
 
 
 export function showModal(window: string): Action {
@@ -21,4 +22,7 @@ export function deselectItem(item: ItemDoc): Action {
 }
 export function clearSelectedItems(): Action {
   return { type: ActionType.CLEAR_SELECTED_ITEMS }
+}
+export function setLoggedUser(loggedUser: LoggedUser): Action {
+  return { type: ActionType.SET_LOGGED_USER, payload: loggedUser }
 }

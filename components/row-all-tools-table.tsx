@@ -7,6 +7,8 @@ import { CheckBox } from './ui/check-box';
 import { useSession } from 'next-auth/client';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { statusDic } from '../utils/statusDictionary';
+import { ItemImagePreview } from './item-image-preview';
+import { getItemText } from '../utils/getItemText';
 
 
 
@@ -18,11 +20,12 @@ import { statusDic } from '../utils/statusDictionary';
 
 interface Props {
   item: ItemDoc,
+  showModal: Function
   // handleCheckBox: (selected: boolean, item: ItemDoc) => void
 }
 const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'
 
-export function RowAllToolsTable({ item }: Props) {
+export function RowAllToolsTable({ item, showModal }: Props) {
 
   const [session, loading] = useSession();
   const selectedLocation = useTypedSelector(state => state.main.location)
@@ -30,36 +33,12 @@ export function RowAllToolsTable({ item }: Props) {
 
   const router = useRouter()
 
-  function renderIcon() {
 
-    if (item.imageKey) {
-      return (
-        <div className='item-img' style={{ backgroundImage: `url(${AWS_URL}/${item.imageKey})` }}>
-        </div>
-      )
-    } else {
-      return (
-        <div className='item-img' >
-          <FileIcon cssClassName='file-icon' />
-        </div>
-      )
-    }
-  }
 
   function navigateToEditPage() {
     router.push(`/item/${item._id}`)
   }
 
-  function showCheckBox() {
-
-    if (selectedLocation?.locationType === 'stock')
-      return true
-    //@ts-ignore
-    else if (selectedLocation?.locationType === 'location' && session?.user.admin)
-      return true
-
-    return false
-  }
 
   function getStatusText() {
     if (item.location.locationType === 'stock')
@@ -70,32 +49,30 @@ export function RowAllToolsTable({ item }: Props) {
 
 
   return (
-    <div className={cn('row ')}>
+    <div className='table table-row'>
+      <div className='item'>
+        {
+          item.imageKey
+            ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
+            : <div className='item-img' >
+              <FileIcon cssClassName='file-icon' />
+            </div>
+        }
 
-      <div className='item flex-30'>
-
-
-        {/* {item.imageKey &&
-          <div className='item-img' style={{ backgroundImage: `url(${AWS_URL}/${item.imageKey})` }} />
-          // : <div className='item-img' >
-          //   <FileIcon cssClassName='file-icon' />
-          // </div>
-        } */}
-
-        <span onClick={navigateToEditPage} className='item-txt'>
-          {item.name} {item.quantity > 1 && item.quantity}
+        <span className='item-txt'>
+          {getItemText(item)}
+          <div className='edit-btn'>
+            <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
+          </div>
         </span>
 
       </div>
 
-      <div className='flex-20'>{item.serialNumber} </div>
-      <div className='flex-20'>{item.location.name} </div>
+      <div className='sn'>{item.serialNumber} </div>
+      <div className='location'>{item.location.name} </div>
 
-      <div className='flex-15'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
-      <div className='flex-15'>{getStatusText()}</div>
+      <div className='responsible'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
+      <div className='status'>{getStatusText()}</div>
     </div>
-
   )
 }
-
-// style = {{ backgroundImage: `url(${imageUrl})` }}

@@ -1,3 +1,4 @@
+import { LoggedUser } from './../../interfaces/common_interfaces';
 import { ItemDoc } from './../../model/Item';
 import { LocationDoc } from '../../model/Location';
 import { ActionType } from '../action-types';
@@ -6,11 +7,14 @@ import { Action } from '../actions';
 interface MainState {
   location: LocationDoc | null;
   selectedItems: Array<ItemDoc>;
+  loggedUser: LoggedUser
+
 }
 
 const initialState = {
   location: null,
-  selectedItems: []
+  selectedItems: [],
+  loggedUser: null
 };
 
 const reducer = (
@@ -26,6 +30,8 @@ const reducer = (
       return { ...state, location: action.payload, selectedItems: [] };
     case ActionType.CLEAR_SELECTED_ITEMS:
       return { ...state, selectedItems: [] };
+    case ActionType.SET_LOGGED_USER:
+      return { ...state, loggedUser: action.payload };
     default:
       return state;
   }

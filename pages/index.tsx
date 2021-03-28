@@ -10,7 +10,7 @@ import { LocationsList } from '../components/locations-list';
 import { GetServerSideProps } from 'next';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import { ModalResponsible } from '../components/modal-responsible';
+import { ModalItemImage } from '../components/modal-item-image';
 import { Loader } from '../components/loader';
 
 
@@ -18,7 +18,7 @@ import { Loader } from '../components/loader';
 
 
 export default function Home() {
-  const { closeModal, setLocation } = useActions()
+  const { closeModal } = useActions()
   const { show, window } = useTypedSelector(state => state.ui)
 
 
@@ -58,8 +58,8 @@ export default function Home() {
         show={show && window === 'location' || window === 'edit-location'}
         close={closeModal}
       />
-      <ModalResponsible
-        show={show && window === 'change-responsible'}
+      <ModalItemImage
+        show={show && /^show-image/.test(window)}
         close={() => closeModal()}
       />
 

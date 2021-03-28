@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.2",
     "@types/react-redux": "^7.1.16",
     "@types/uuid": "^8.3.0",
     "aws-sdk": "^2.856.0",
@@ -17,6 +18,7 @@
     "mongoose": "5.9.13",
     "next": "10.0.7",
     "next-auth": "^3.5.0",
+    "nextjs-progressbar": "^0.0.8",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "^7.2.2",

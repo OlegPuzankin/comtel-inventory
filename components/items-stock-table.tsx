@@ -11,7 +11,7 @@ interface Props {
 }
 export function ItemsStockTable({ items }: Props) {
   const selectedItems = useTypedSelector(state => state.main.selectedItems)
-  const { selectItem, deselectItem } = useActions()
+  const { selectItem, deselectItem, showModal } = useActions()
   const { checked, toggleCheckbox } = useCheckBox(items)
   const [session, loading] = useSession();
 
@@ -39,20 +39,20 @@ export function ItemsStockTable({ items }: Props) {
 
 
   return (
-    <div className='items-table'>
-      <div className='header'>
-        <div className='item flex-60'>
+    <div className='table-wrapper'>
+      <div className='table table-header'>
+        <div className='item'>
           {memoShowCheckBox && <div className='checkbox'>
             <input
               type='checkbox'
               checked={checked}
               onChange={toggleCheckbox} />
           </div>}
-          <span className='ml-1'>Name</span>
+          <span className='item-txt'>Name</span>
         </div>
 
-        <div className='flex-20'>Serial number</div>
-        <div className='flex-20'>Date</div>
+        <div className='sn'>Serial number</div>
+        <div className='date'>Date</div>
 
 
       </div>
@@ -61,6 +61,7 @@ export function ItemsStockTable({ items }: Props) {
         item={i}
         showCheckBox={memoShowCheckBox}
         handleCheckBox={handleCheckBox}
+        showModal={showModal}
         selected={selectedItems?.some(si => si._id === i._id)} />)}
     </div>
   )

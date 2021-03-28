@@ -1,6 +1,7 @@
 import { LocationDoc } from './../../model/Location';
 import { ActionType } from '../action-types';
 import { ItemDoc } from '../../model/Item';
+import { LoggedUser } from '../../interfaces/common_interfaces';
 
 interface SHOW_MODAL {
   type: ActionType.SHOW_MODAL
@@ -24,8 +25,13 @@ interface DESELECT_ITEM {
 interface CLEAR_SELECTED_ITEMS {
   type: ActionType.CLEAR_SELECTED_ITEMS,
 }
+interface SET_LOGGED_USER {
+  type: ActionType.SET_LOGGED_USER,
+  payload: LoggedUser
+}
 
 
 
-export type Action = SHOW_MODAL | CLOSE_MODAL | SET_LOCATION | SELECT_ITEM | DESELECT_ITEM | CLEAR_SELECTED_ITEMS
+export type Action = SHOW_MODAL | CLOSE_MODAL | SET_LOCATION
+  | SELECT_ITEM | DESELECT_ITEM | CLEAR_SELECTED_ITEMS | SET_LOGGED_USER
 

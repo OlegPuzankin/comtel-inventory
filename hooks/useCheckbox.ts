@@ -4,7 +4,7 @@ import { useActions } from './useActions'
 import { useTypedSelector } from './useTypedSelector'
 
 export function useCheckBox(items: Array<ItemDoc>) {
-  const { selectItem, deselectItem, clearSelectedItems } = useActions()
+  const { selectItem, clearSelectedItems } = useActions()
   const selectedItems = useTypedSelector(state => state.main.selectedItems)
   const [checked, setChecked] = React.useState(false)
 

@@ -1,3 +1,5 @@
+import { User } from 'next-auth';
+
 export interface MenuItem {
   id: string
   menuItemText: string
@@ -8,6 +10,10 @@ export enum ItemStatus {
   Pending = "pending",
   OnLocation = "onLocation",
   OnStock = "onStock"
+}
+
+export interface LoggedUser extends User {
+  admin: boolean
 }
 
 export enum UnitMeasure {
@@ -23,3 +29,4 @@ export enum ItemType {
   Tool = "tool",
   Materail = "material",
 }
+

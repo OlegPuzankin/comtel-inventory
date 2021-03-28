@@ -1,19 +1,20 @@
 .layout {
-  display: flex;
-  min-height: 92vh;
+  display: grid;
+  min-height: 90vh;
+  grid-template-columns: 20% 80%;
 }
 
 .locations {
   color: #fff;
   background-color: $pr-ocean;
-  min-width: 25%;
-  height: 92vh;
+  // min-width: 20%;
+  // min-height: 90vh;
   // padding: 1rem 0.5em;
 }
 
 .items {
   background-color: $gray-800;
   // background-color: rgba($pr-warm, 0.5);
-  height: 92vh;
-  min-width: 75%;
+  // height: 90vh;
+  // min-width: 80%;
 }

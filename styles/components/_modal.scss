@@ -19,7 +19,7 @@
 .modal {
   max-width: 90%;
   max-height: 90%;
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,58 +37,59 @@
     visibility: visible;
     opacity: 1;
   }
-}
 
-.new-form {
-  // flex-direction: column;
-  padding: 0 2rem;
   &-header {
     font-size: 1.25rem;
     text-align: center;
     padding: 0.75rem 0;
-    background-color: $pr-warm;
-    color: $pr-navy;
+    background-color: $pr-ocean;
+    color: #fff;
     text-transform: uppercase;
     margin-bottom: 2rem;
   }
 
-  &-buttons {
-    padding: 0.5rem 2rem 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  &-info {
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding-bottom: 0.5rem;
-    text-align: right;
-  }
-}
+  .form {
+    // flex-direction: column;
+    padding: 0 2rem;
 
-.users-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 0 1rem 0;
-  // height: 300px;
-  // overflow: scroll;
-  border: 1px solid black;
-
-  .user {
-    width: 100%;
-    padding: 0.75rem 2rem;
-    text-align: center;
-    cursor: pointer;
-    // background-color: $pr-warm;
-    &:hover {
-      background-color: lighten($pr-warm, 10);
+    &-buttons {
+      padding: 0.5rem 2rem 1rem;
+      display: flex;
+      justify-content: space-between;
     }
   }
 
-  & + .cancel-btn-wrapper {
+  .image-wrapper {
+    padding: 2rem;
     display: flex;
     justify-content: center;
-    margin: 1rem 0;
+    align-items: center;
+  }
+
+  &-item-image {
+    width: 450px;
+    height: 450px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    .close-icon {
+      position: absolute;
+      right: 0.25rem;
+      top: 0.25rem;
+      width: 2rem;
+      height: 2rem;
+      background-color: $pr-punch;
+      color: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($pr-punch, 10);
+      }
+    }
   }
 }

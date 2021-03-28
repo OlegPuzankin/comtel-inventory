@@ -236,6 +236,7 @@ function EditItem() {
 
 
           <div className='row'>
+            <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>назад</button>
             <button className='btn btn-navy' type='submit'>update</button>
             <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>
           </div>

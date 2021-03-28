@@ -13,6 +13,7 @@ import { CustomFileInput } from './ui/custom-file-input';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { Loader } from './loader';
 import { loadImage } from '../utils/loadImage';
+import { ItemType } from '../interfaces/common_interfaces';
 
 interface Props {
   show: boolean,
@@ -21,6 +22,16 @@ interface Props {
 
 }
 
+
+const itemTypes = [
+  {
+    value: ItemType.Tool,
+    displayText: 'Інструмент'
+  },
+  {
+    value: ItemType.Materail,
+    displayText: 'Матеріали'
+  },]
 
 
 export function ModalAddItem({ show, close, data }: Props) {
@@ -32,7 +43,8 @@ export function ModalAddItem({ show, close, data }: Props) {
   const formik = useFormik({
     initialValues: {
       name: '',
-      location: ''
+      location: '',
+      type: 'material'
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Field can not be empty"),
@@ -70,12 +82,15 @@ export function ModalAddItem({ show, close, data }: Props) {
     setImage(e.target.files[0])
   }
 
+  console.log(formik.values);
+
+
 
   return (
     <div className={cn('modal-backdrop', { 'modal-backdrop--visible': show })}>
       <div className={cn('modal', { 'modal--visible': show })}>
-        <div className='new-form-header'>Add item</div>
-        <form onSubmit={formik.handleSubmit} className='new-form'>
+        <div className='modal-header'>Add item</div>
+        <form onSubmit={formik.handleSubmit} className='form'>
           <TextInput
             label={`item's name`}
 
@@ -98,9 +113,20 @@ export function ModalAddItem({ show, close, data }: Props) {
               value: formik.values.location
             }}
           />
+          <Select
+            label='select type'
+            error={formik.touched.type && formik.errors.type}
+            items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
+            selectProps={{
+              onChange: formik.handleChange,
+              onBlur: formik.handleBlur,
+              name: 'type',
+              value: formik.values.type
+            }}
+          />
 
           <CustomFileInput fileName={image?.name} onChangeHandler={onFileSelect} />
-          <div className='new-form-buttons mt-1'>
+          <div className='form-buttons mt-1'>
             <button className='btn btn-navy py-1' type='submit'>add item</button>
             <button className='btn btn-punch py-1' type='button' onClick={close}>cancel</button>
           </div>

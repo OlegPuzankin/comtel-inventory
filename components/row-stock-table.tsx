@@ -7,6 +7,8 @@ import { CheckBox } from './ui/check-box';
 import { useSession } from 'next-auth/client';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { statusDic } from '../utils/statusDictionary';
+import { ItemImagePreview } from './item-image-preview';
+import { getItemText } from '../utils/getItemText';
 
 
 
@@ -20,30 +22,24 @@ interface Props {
   item: ItemDoc,
   selected: boolean,
   handleCheckBox: (selected: boolean, item: ItemDoc) => void
-  showCheckBox: boolean
+  showCheckBox: boolean,
+  showModal: Function
 }
 const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'
 
-export function RowStockTable({ item, selected, handleCheckBox, showCheckBox }: Props) {
+export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
 
   const router = useRouter()
 
   function navigateToEditPage() {
     router.push(`/item/${item._id}`)
   }
-  function getItemText() {
-    const arrText = [item.name]
-    if (item.desc)
-      arrText.push(item.desc)
-    else if (item.quantity > 1)
-      arrText.push(`${item.quantity} ${item.measure}`)
-    return arrText.join(', ')
-  }
+
 
   return (
-    <div className={cn('row', { 'selected': selected })}>
+    <div className={cn('table table-row', { 'selected': selected })}>
 
-      <div className='item flex-60'>
+      <div className='item'>
         {showCheckBox &&
           <div className='checkbox'>
             <input
@@ -55,25 +51,25 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox }: 
 
         {
           item.imageKey
-            ? <div className='item-img' style={{ backgroundImage: `url(${AWS_URL}/${item.imageKey})` }} />
+            ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
             : <div className='item-img' >
               <FileIcon cssClassName='file-icon' />
             </div>
         }
 
-        <span onClick={navigateToEditPage} className='item-txt'>
-          {getItemText()}
+        <span className='item-txt'>
+          {getItemText(item)}
+          <div className='edit-btn'>
+            <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
+          </div>
         </span>
-
       </div>
 
-      <div className='flex-20'>{item.serialNumber} </div>
-      <div className='flex-20'>
+      <div className='sn'>{item.serialNumber} </div>
+      <div className='date'>
         {new Date(item.timestamp).toLocaleDateString('en-GB')}
       </div>
-
     </div>
-
   )
 }
 

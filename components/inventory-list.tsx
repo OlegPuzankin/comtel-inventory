@@ -1,21 +1,19 @@
 import axios from 'axios';
 import React from 'react';
 import { ItemStatus, ItemType, LocationType, MenuItem } from '../interfaces/common_interfaces';
-import { Item, ItemDoc } from '../model/Item';
+import { ItemDoc } from '../model/Item';
 import { useGetItems, useGetLocations, useGetUsers } from '../hooks/swr';
-import { RowLocationTable } from './row-location-table';
 import { DropDown } from './ui/drop-down';
-import { LocationDoc } from '../model/Location';
-import { GearIcon } from './icons/gear-icon';
 import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { EditButton } from './ui/edit-button';
 import { ItemsLocationTable } from './items-location-table';
-import { session, useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/client';
 import { mutate } from 'swr';
 import { ItemsAllToolsTable } from './items-all-tools-table';
 import { statusDic } from '../utils/statusDictionary';
 import { ItemsStockTable } from './items-stock-table';
+import { Loader } from './loader';
 
 
 
@@ -26,20 +24,22 @@ export function InventoryList() {
   const { location: selectedLocation, selectedItems } = useTypedSelector(state => state.main)
   const [session] = useSession();
   const { data: users } = useGetUsers()
+  const [loading, setLoading] = React.useState(false)
 
 
 
 
   async function moveItems(selectedItems: Array<ItemDoc>, locationId: string) {
+    setLoading(true)
     const selectedItemsId = selectedItems.map(i => i._id)
     await axios.put('/api/item/move', { selectedItemsId, locationId })
-    // mutate('/api/item')
     mutateItems()
     clearSelectedItems()
+    setLoading(false)
   }
 
   function moveMenuItems(): Array<MenuItem> {
-    return locations?.data.map(l => {
+    return locations?.data.filter(l => l._id !== selectedLocation._id).map(l => {
       return {
         id: l._id,
         menuItemText: l.name,
@@ -140,22 +140,19 @@ export function InventoryList() {
     <div className='inventory-list'>
       <div className='inventory-list-top-row'>
 
-
-        <span className='current-location'>{getLocatioName()}</span>
         {showEditLocationButton() &&
           <div className='edit-location-btn' onClick={() => showModal('edit-location')}>
             <EditButton />
           </div>
         }
+        <span className='current-location'>{getLocatioName()}</span>
+
         {showMoveButton() &&
           <div className='move-btn'>
             <DropDown buttonText='Move to' menuItems={moveMenuItems()} />
           </div>
         }
         {showChangeStatusOrResponsible() &&
-          // <div
-          //   onClick={() => showModal('change-responsible')}
-          // className='btn btn-navy'>responsible</div>
           <DropDown buttonText='Responsible' menuItems={changeResponsibleMenuItems()} />
         }
 
@@ -178,7 +175,11 @@ export function InventoryList() {
       {selectedLocation?.locationType === 'stock' && <ItemsStockTable items={filterItemsByLocation()} />}
       {!selectedLocation && <ItemsAllToolsTable items={filterItemsByLocation()} />}
 
-    </div>
 
+      {loading && <div className='loader-container'>
+        <Loader />
+      </div>}
+
+    </div>
   )
 }

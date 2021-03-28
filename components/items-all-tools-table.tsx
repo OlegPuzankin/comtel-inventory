@@ -8,22 +8,24 @@ interface Props {
   items: Array<ItemDoc>
 }
 export function ItemsAllToolsTable({ items }: Props) {
+  const { showModal } = useActions()
 
   return (
-    <div className='items-table'>
-      <div className='header'>
-        <div className='item flex-30'>
-          <span className='ml-1'> Name</span>
+    <div className='table-wrapper'>
+      <div className='table table-header'>
+        <div className='item'>
+          <span className='item-txt'>Name</span>
         </div>
-        <div className='flex-20'>Serial number</div>
-        <div className='flex-20'>Location</div>
-        <div className='flex-15'>Responsible</div>
-        <div className='flex-15'>Status</div>
+        <div className='sn'>Serial number</div>
+        <div className='location'>Location</div>
+        <div className='responsible'>Responsible</div>
+        <div className='status'>Status</div>
 
       </div>
       {items?.map(i => <RowAllToolsTable
         key={i._id}
         item={i}
+        showModal={showModal}
       />)
       }
     </div>

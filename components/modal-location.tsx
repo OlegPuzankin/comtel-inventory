@@ -84,11 +84,17 @@ export function ModalLocation({ show, close }: Props) {
   }
 
   async function deleteLocation() {
-    await axios.delete(`/api/location/${location._id}`)
-    mutate('/api/location')
-    setLocation(null)
-    close()
-
+    try {
+      setLoading(true)
+      await axios.delete(`/api/location/${location._id}`)
+      mutate('/api/location')
+      setLocation(null)
+      setLoading(false)
+      close()
+    } catch (e) {
+      setLoading(false)
+      console.log(e)
+    }
   }
 
   function canDelete() {
@@ -96,21 +102,20 @@ export function ModalLocation({ show, close }: Props) {
   }
 
   React.useEffect(() => {
-    if (location)
+    if (window === 'edit-location')
       formik.setValues({ name: location.name, locationType: location.locationType })
-
-  }, [location])
+  }, [window])
 
   return (
     <div className={cn('modal-backdrop', { 'modal-backdrop--visible': show })}>
       <div className={cn('modal', { 'modal--visible': show })}>
-        <div className='new-form-header'>
+        <div className='modal-header'>
           {window === 'location'
             ? 'Add location'
             : 'Edit Location'
           }
         </div>
-        <form onSubmit={formik.handleSubmit} className='new-form'>
+        <form onSubmit={formik.handleSubmit} className='form'>
           <TextInput
             label={`location's name`}
 
@@ -134,7 +139,7 @@ export function ModalLocation({ show, close }: Props) {
             }}
           />
 
-          <div className='new-form-buttons'>
+          <div className='form-buttons'>
             <button className='btn btn-ocean py-1' type='submit'>
               {window === 'location'
                 ? 'Add location'

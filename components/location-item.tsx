@@ -26,7 +26,7 @@ export function LocationItem({ location, setLocation, countItems, isSelected }: 
         <FolderIcon />
       </div> */}
       <span className='location-name'>{location.name} </span>
-      <span className='countItems'>{countItems}</span>
+      {countItems > 0 && <span className='countItems'>{countItems}</span>}
     </div>
 
   )

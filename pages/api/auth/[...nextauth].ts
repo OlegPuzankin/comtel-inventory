@@ -1,13 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
+import { useActions } from '../../../hooks/useActions';
 import { User } from '../../../model/User';
 import dbConnect from '../../../utils/dbConnect';
 
 const options: InitOptions = {
-  // site: process.env.SITE || 'http://localhost:3000',
-
-
   // Configure one or more authentication providers
   providers: [
     Providers.Google({
@@ -34,7 +32,7 @@ const options: InitOptions = {
       return true
     },
     async session(session, user) {
-
+      // console.log('session invoke', session, user)
       await dbConnect()
       const _user = await User.findOne({ email: user.email })
       //@ts-ignore

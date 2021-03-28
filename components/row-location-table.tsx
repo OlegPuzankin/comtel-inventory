@@ -7,6 +7,8 @@ import { CheckBox } from './ui/check-box';
 import { useSession } from 'next-auth/client';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { statusDic } from '../utils/statusDictionary';
+import { AWS_URL } from '../utils/const_variables';
+import { ItemImagePreview } from './item-image-preview';
 
 
 
@@ -20,11 +22,11 @@ interface Props {
   item: ItemDoc,
   selected: boolean,
   handleCheckBox: (selected: boolean, item: ItemDoc) => void
-  showCheckBox: boolean
+  showCheckBox: boolean,
+  showModal: Function
 }
-const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'
 
-export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox }: Props) {
+export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
   const router = useRouter()
 
   function navigateToEditPage() {
@@ -33,9 +35,9 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox 
 
 
   return (
-    <div className={cn('row', { 'selected': selected })}>
+    <div className={cn('table table-row', { 'selected': selected })}>
 
-      <div className='item flex-40' onClick={navigateToEditPage}>
+      <div className='item' >
         {showCheckBox &&
           <div className='checkbox'>
             <input type='checkbox' checked={selected} onChange={() => handleCheckBox(selected, item)} />
@@ -44,22 +46,23 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox 
 
         {
           item.imageKey
-            ? <div className='item-img' style={{ backgroundImage: `url(${AWS_URL}/${item.imageKey})` }} />
+            ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
             : <div className='item-img' >
               <FileIcon cssClassName='file-icon' />
             </div>
         }
 
-        <span className='item-txt'>
+        <span className='item-txt' >
           {item.name}
+          <div className='edit-btn'>
+            <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
+          </div>
         </span>
-
       </div>
 
-
-      <div className='flex-20'>{item.responsiblePerson?.name}</div>
-      <div className='flex-20'>{statusDic[item.status]}</div>
-      <div className='flex-20'>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
+      <div className='responsible'>{item.responsiblePerson?.name}</div>
+      <div className='status'>{statusDic[item.status]}</div>
+      <div className='date'>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
     </div>
 
   )

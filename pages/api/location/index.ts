@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   switch (method) {
     case 'GET':
       try {
-        const locations = await Location.find({}, ['name', 'locationType'])
+        const locations = await Location.find({}, ['name', 'locationType']).sort({ locationType: 'desc' })
         res.status(200).json({ success: true, data: locations })
       } catch (error) {
         res.status(400).json({ success: false })
