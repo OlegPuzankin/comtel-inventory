@@ -23,12 +23,21 @@ export default function Home() {
 
 
 
-  const { data: locations } = useGetLocations()
-  const { data: items } = useGetItems()
+  const { data: locations, isValidating: isValidatingLocations } = useGetLocations()
+  const { data: items, isValidating: isValidatingItems, error } = useGetItems()
+
+  // // !locations && !items
+  // console.log('l', isValidatingLocations);
+  // console.log('i', isValidatingItems);
+
+  if (error) {
+    console.log(error);
+    return <h1>WTF ERROR</h1>
+  }
 
 
 
-  if (!locations && !items) {
+  if (!locations || !items) {
     return (
       <Layout title='Inventory' >
         <div className='loader-container'>

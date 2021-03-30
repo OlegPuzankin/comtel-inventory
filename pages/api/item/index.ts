@@ -17,6 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const items = await Item.find({}).populate('location').populate('responsiblePerson')
         res.status(200).json({ success: true, data: items })
       } catch (error) {
+        console.log(error)
         res.status(400).json({ success: false })
       }
       break

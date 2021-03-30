@@ -25,7 +25,6 @@ interface Props {
   showCheckBox: boolean,
   showModal: Function
 }
-const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'
 
 export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
 
@@ -39,7 +38,7 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
   return (
     <div className={cn('table table-row', { 'selected': selected })}>
 
-      <div className='item'>
+      <div className='item grid-col-3'>
         {showCheckBox &&
           <div className='checkbox'>
             <input

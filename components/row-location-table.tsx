@@ -3,11 +3,7 @@ import { ItemDoc } from '../model/Item';
 import { FileIcon } from './icons/file-icon';
 import cn from 'classnames'
 import { useRouter } from 'next/router'
-import { CheckBox } from './ui/check-box';
-import { useSession } from 'next-auth/client';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 import { statusDic } from '../utils/statusDictionary';
-import { AWS_URL } from '../utils/const_variables';
 import { ItemImagePreview } from './item-image-preview';
 
 
@@ -37,7 +33,7 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
   return (
     <div className={cn('table table-row', { 'selected': selected })}>
 
-      <div className='item' >
+      <div className='item grid-col-2' >
         {showCheckBox &&
           <div className='checkbox'>
             <input type='checkbox' checked={selected} onChange={() => handleCheckBox(selected, item)} />

@@ -16,7 +16,7 @@ export function ItemsAllToolsTable({ items }: Props) {
         <div className='item'>
           <span className='item-txt'>Name</span>
         </div>
-        <div className='sn'>Serial number</div>
+        <div className='sn'>Ser number</div>
         <div className='location'>Location</div>
         <div className='responsible'>Responsible</div>
         <div className='status'>Status</div>

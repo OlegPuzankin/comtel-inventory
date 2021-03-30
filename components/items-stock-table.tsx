@@ -41,7 +41,7 @@ export function ItemsStockTable({ items }: Props) {
   return (
     <div className='table-wrapper'>
       <div className='table table-header'>
-        <div className='item'>
+        <div className='item grid-col-3'>
           {memoShowCheckBox && <div className='checkbox'>
             <input
               type='checkbox'

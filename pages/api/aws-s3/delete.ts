@@ -1,9 +1,6 @@
 import dbConnect from '../../../utils/dbConnect'
-import { Location } from '../../../model/Location'
 import { NextApiRequest, NextApiResponse } from 'next'
 import AWS from 'aws-sdk'
-import { v4 as uuidv4, v4 } from 'uuid';
-import { getSession } from 'next-auth/client';
 import { Item } from '../../../model/Item';
 
 
@@ -15,13 +12,7 @@ AWS.config.update({
 
 })
 
-const s3 = new AWS.S3({
-
-})
-
-
-
-
+const s3 = new AWS.S3()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
@@ -32,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await dbConnect()
 
   s3.deleteObject({
-    Bucket: 'comtel-inventory',
+    Bucket: process.env.AWS_BUCKET_NAME,
     Key: query.key as string
   }, async function (err, data) {
     if (err) console.log(err, err.stack);

@@ -5,12 +5,9 @@ import * as Yup from "yup";
 import axios from 'axios';
 import { Select } from './ui/select';
 import cn from 'classnames'
-import useSWR, { trigger, mutate } from 'swr';
-import { GetLocationsResponse, GetPresignURLResponse } from '../interfaces/api_response';
+import { mutate } from 'swr';
 import { LocationDoc } from '../model/Location';
-import { AddImageIcon } from './icons/add-image-icon';
 import { CustomFileInput } from './ui/custom-file-input';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 import { Loader } from './loader';
 import { loadImage } from '../utils/loadImage';
 import { ItemType } from '../interfaces/common_interfaces';
@@ -79,11 +76,9 @@ export function ModalAddItem({ show, close, data }: Props) {
   // }, [location])
 
   function onFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    debugger
     setImage(e.target.files[0])
   }
-
-  console.log(formik.values);
-
 
 
   return (

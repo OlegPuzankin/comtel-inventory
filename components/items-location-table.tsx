@@ -43,7 +43,7 @@ export function ItemsLocationTable({ items }: Props) {
   return (
     <div className='table-wrapper'>
       <div className='table table-header'>
-        <div className='item'>
+        <div className='item grid-col-2'>
           {
             memoShowCheckBox &&
             <div className='checkbox'>

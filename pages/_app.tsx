@@ -4,9 +4,8 @@ import { Provider as ReduxProvider } from "react-redux"
 import { store } from '../state'
 import NextNprogress from "nextjs-progressbar"
 
-
-
 function MyApp({ Component, pageProps }) {
+
 
   return (
     <>

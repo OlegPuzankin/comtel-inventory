@@ -23,7 +23,6 @@ interface Props {
   showModal: Function
   // handleCheckBox: (selected: boolean, item: ItemDoc) => void
 }
-const AWS_URL = 'https://comtel-inventory.s3.eu-central-1.amazonaws.com'
 
 export function RowAllToolsTable({ item, showModal }: Props) {
 
@@ -69,7 +68,9 @@ export function RowAllToolsTable({ item, showModal }: Props) {
       </div>
 
       <div className='sn'>{item.serialNumber} </div>
-      <div className='location'>{item.location.name} </div>
+      <div className='location'>
+        <span className='txt'>{item.location.name}</span>
+      </div>
 
       <div className='responsible'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
       <div className='status'>{getStatusText()}</div>

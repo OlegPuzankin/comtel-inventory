@@ -4,13 +4,11 @@ import Layout from '../../components/layout';
 import { useFormik } from 'formik'
 import { TextInput } from '../../components/ui/text-input';
 import { Select } from '../../components/ui/select';
-import { useGetItem, useGetItems, useGetLocations, useGetUsers } from '../../hooks/swr';
+import { useGetItems } from '../../hooks/swr';
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next';
 import { ItemDoc } from '../../model/Item';
-import { AWS_URL } from '../../utils/const_variables';
-import { CustomFileInput } from '../../components/ui/custom-file-input';
 import { loadImage } from '../../utils/loadImage';
 import { Loader } from '../../components/loader';
 import { ImageUploadInput } from '../../components/ui/image-upload-input';
@@ -219,7 +217,7 @@ function EditItem() {
                   <span>item's image</span>
                   {
                     item.imageKey
-                      ? <div className='item-img' style={{ backgroundImage: `url(${AWS_URL}/${item.imageKey})` }}>
+                      ? <div className='item-img' style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_AWS_BUCKET_URL}/${item.imageKey})` }}>
                         <div className='delete-img-btn' onClick={deleteImage}>delete image</div>
                       </div>
                       : <ImageUploadInput
