@@ -6,22 +6,14 @@ async function dbConnect() {
   if (mongoose.connection.readyState >= 1) {
     return
   }
-  if (process.env.NODE_ENV === 'production') {
-    return mongoose.connect(process.env.DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    })
-  } else {
 
-    return mongoose.connect(process.env.LOCAL_DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    })
-  }
+  return mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+
 }
 
 export default dbConnect
