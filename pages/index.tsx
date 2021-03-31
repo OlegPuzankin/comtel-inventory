@@ -2,7 +2,7 @@ import { GetItemsResponse, GetLocationsResponse } from '../interfaces/api_respon
 import { getSession } from 'next-auth/client';
 import React from 'react';
 import Layout from '../components/layout';
-import { useGetItems, useGetLocations } from '../hooks/swr';
+import { useGetItem, useGetItems, useGetLocations, useGetUsers } from '../hooks/swr';
 import { ModalAddItem } from '../components/modal-add-item';
 import { InventoryList } from '../components/inventory-list';
 import { ModalLocation } from '../components/modal-location';
@@ -24,6 +24,7 @@ export default function Home() {
 
 
   const { data: locations, isValidating: isValidatingLocations } = useGetLocations()
+  const { data: users } = useGetUsers()
   const { data: items, isValidating: isValidatingItems, error } = useGetItems()
 
   // // !locations && !items
@@ -32,7 +33,7 @@ export default function Home() {
 
   if (error) {
     console.log(error);
-    return <h1>WTF ERROR</h1>
+    return <h1>WTF ERROR {error}</h1>
   }
 
 
@@ -45,8 +46,6 @@ export default function Home() {
         </div>
       </Layout>)
   }
-
-
 
   return (
     <Layout title='Inventory' >
