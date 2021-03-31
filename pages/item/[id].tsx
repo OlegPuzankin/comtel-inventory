@@ -14,18 +14,8 @@ import { Loader } from '../../components/loader';
 import { ImageUploadInput } from '../../components/ui/image-upload-input';
 import { getSession } from 'next-auth/client';
 import { GetItemResponse, PutItemResponse } from '../../interfaces/api_response';
-// import { mutate } from 'swr';
-// import { DropDown } from '../components/drop-down';
+import { measureUnits } from '../../utils/measureUnits';
 
-
-// interface Props {
-//   item: ItemDoc,
-// }
-
-const measureUnits = [
-  { value: 'meter', displayText: 'метри' },
-  { value: 'pcs', displayText: 'шт' },
-]
 
 function EditItem() {
   const [loading, setLoading] = React.useState(false)

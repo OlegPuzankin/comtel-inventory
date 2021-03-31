@@ -11,6 +11,7 @@ import { CustomFileInput } from './ui/custom-file-input';
 import { Loader } from './loader';
 import { loadImage } from '../utils/loadImage';
 import { ItemType } from '../interfaces/common_interfaces';
+import { measureUnits } from '../utils/measureUnits';
 
 interface Props {
   show: boolean,
@@ -41,7 +42,8 @@ export function ModalAddItem({ show, close, data }: Props) {
     initialValues: {
       name: '',
       location: '',
-      type: 'material'
+      type: 'material',
+      measure: ''
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Field can not be empty"),
@@ -75,10 +77,10 @@ export function ModalAddItem({ show, close, data }: Props) {
   //   formik.setFieldValue('location', location?._id)
   // }, [location])
 
-  function onFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
-    debugger
-    setImage(e.target.files[0])
-  }
+  // function onFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+  //   debugger
+  //   setImage(e.target.files[0])
+  // }
 
 
   return (
@@ -108,19 +110,33 @@ export function ModalAddItem({ show, close, data }: Props) {
               value: formik.values.location
             }}
           />
-          <Select
-            label='select type'
-            error={formik.touched.type && formik.errors.type}
-            items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
-            selectProps={{
-              onChange: formik.handleChange,
-              onBlur: formik.handleBlur,
-              name: 'type',
-              value: formik.values.type
-            }}
-          />
+          <div className='grid'>
+            <Select
+              label='select type'
+              error={formik.touched.type && formik.errors.type}
+              items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
+              selectProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'type',
+                value: formik.values.type
+              }}
+            />
+            <Select
+              label='meas.unit'
+              error={formik.touched.measure && formik.errors.measure}
+              items={measureUnits.map(mu => ({ value: mu.value, displayText: mu.displayText }))}
+              selectProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'measure',
+                value: formik.values.measure
+              }}
+            />
+          </div>
 
-          <CustomFileInput fileName={image?.name} onChangeHandler={onFileSelect} />
+
+          {/* <CustomFileInput fileName={image?.name} onChangeHandler={onFileSelect} /> */}
           <div className='form-buttons mt-1'>
             <button className='btn btn-navy py-1' type='submit'>add item</button>
             <button className='btn btn-punch py-1' type='button' onClick={close}>cancel</button>
