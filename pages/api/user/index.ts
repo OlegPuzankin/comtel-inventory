@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const users = await User.find({})
     res.status(200).json({ success: true, data: users })
   } catch (error) {
-    res.status(400).json({ success: false })
+    res.status(400).json({ success: false, error })
   }
 }
 

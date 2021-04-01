@@ -3,17 +3,18 @@
   background-color: #fff;
 }
 
-.table {
+.table-grid {
   display: grid;
+  width: 100%;
   // grid-template-columns: 3fr repeat(4, 1fr);
-  grid-template-columns: auto repeat(4, max-content);
+  grid-template-columns: minmax(350px, 3fr) repeat(4, minmax(150px, 1fr));
   align-items: stretch;
 
-  // & > * {
-  //   border-right: 1px solid black;
-  // }
+  & > * {
+    border-right: 1px solid black;
+  }
 
-  &-header {
+  .header {
     text-transform: uppercase;
     // background-color: lighten($pr-warm, 0.5);
     color: $pr-navy;
@@ -21,7 +22,7 @@
     font-size: 14px;
     border-bottom: 1px solid $pr-punch;
   }
-  &-row {
+  .row {
     padding: 0.2rem 0;
     border-bottom: 1px solid $pr-warm;
     font-size: 13px;
@@ -85,14 +86,14 @@
   }
 
   .sn {
-    width: 150px;
+    // width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .location {
-    width: 150px;
+    // width: 150px;
     padding: 0 0.25rem;
     overflow: hidden;
     display: flex;
@@ -106,21 +107,21 @@
     }
   }
   .responsible {
-    width: 150px;
+    // width: 150px;
 
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .status {
-    width: 120px;
+    // width: 120px;
 
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .date {
-    width: 120px;
+    // width: 120px;
 
     display: flex;
     align-items: center;
@@ -135,7 +136,7 @@
   // padding: 0.5rem;
   flex-shrink: 0;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     margin: 0;
     width: 100%;
     height: 100%;

@@ -28,11 +28,7 @@ export function RowAllToolsTable({ item, showModal }: Props) {
 
   const [session, loading] = useSession();
   const selectedLocation = useTypedSelector(state => state.main.location)
-
-
   const router = useRouter()
-
-
 
   function navigateToEditPage() {
     router.push(`/item/${item._id}`)
@@ -48,8 +44,8 @@ export function RowAllToolsTable({ item, showModal }: Props) {
 
 
   return (
-    <div className='table table-row'>
-      <div className='item'>
+    <>
+      <div className='row item'>
         {
           item.imageKey
             ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
@@ -67,13 +63,13 @@ export function RowAllToolsTable({ item, showModal }: Props) {
 
       </div>
 
-      <div className='sn'>{item.serialNumber} </div>
-      <div className='location'>
+      <div className='row sn'>{item.serialNumber} </div>
+      <div className='row location'>
         <span className='txt'>{item.location.name}</span>
       </div>
 
-      <div className='responsible'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
-      <div className='status'>{getStatusText()}</div>
-    </div>
+      <div className='row responsible'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
+      <div className='row status'>{getStatusText()}</div>
+    </>
   )
 }

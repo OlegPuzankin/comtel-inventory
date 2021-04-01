@@ -12,22 +12,24 @@ export function ItemsAllToolsTable({ items }: Props) {
 
   return (
     <div className='table-wrapper'>
-      <div className='table table-header'>
-        <div className='item'>
+      <div className='table-grid'>
+        <div className='item header'>
           <span className='item-txt'>Name</span>
         </div>
-        <div className='sn'>Ser number</div>
-        <div className='location'>Location</div>
-        <div className='responsible'>Responsible</div>
-        <div className='status'>Status</div>
+        <div className='sn header'>Ser number</div>
+        <div className='location header'>Location</div>
+        <div className='responsible header'>Responsible</div>
+        <div className='status header'>Status</div>
+
+        {items?.map(i => <RowAllToolsTable
+          key={i._id}
+          item={i}
+          showModal={showModal}
+        />)
+        }
 
       </div>
-      {items?.map(i => <RowAllToolsTable
-        key={i._id}
-        item={i}
-        showModal={showModal}
-      />)
-      }
+
     </div>
   )
 }

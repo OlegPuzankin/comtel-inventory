@@ -23,20 +23,23 @@ export default function Home() {
 
 
 
-  const { data: locations, isValidating: isValidatingLocations } = useGetLocations()
-  const { data: users } = useGetUsers()
-  const { data: items, isValidating: isValidatingItems, error } = useGetItems()
+
+  const { data: locations, isValidating: isValidatingLocations, error: errorLocations } = useGetLocations()
+  const { data: users, error: userError } = useGetUsers()
+  const { data: items, error: itemsError } = useGetItems()
 
   // // !locations && !items
   // console.log('l', isValidatingLocations);
   // console.log('i', isValidatingItems);
 
-  if (error) {
-    console.log(error);
-    return <h1>WTF ERROR {error}</h1>
+  if (errorLocations || userError || itemsError) {
+    console.log('loc--->', errorLocations, 'user--->', userError, 'items--->', itemsError);
+    return <div>
+      {errorLocations && <h1>{errorLocations}</h1>}
+      {userError && <h1>{userError}</h1>}
+      {itemsError && <h1>{itemsError}</h1>}
+    </div>
   }
-
-
 
   if (!locations || !items) {
     return (
@@ -70,10 +73,7 @@ export default function Home() {
         show={show && /^show-image/.test(window)}
         close={() => closeModal()}
       />
-
-
     </Layout>
-
   )
 }
 
