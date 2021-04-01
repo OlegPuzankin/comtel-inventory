@@ -40,8 +40,8 @@ export function ItemsStockTable({ items }: Props) {
 
   return (
     <div className='table-wrapper'>
-      <div className='table table-header'>
-        <div className='item grid-col-3'>
+      <div className='table-grid'>
+        <div className='item header grid-col-3'>
           {memoShowCheckBox && <div className='checkbox'>
             <input
               type='checkbox'
@@ -51,18 +51,19 @@ export function ItemsStockTable({ items }: Props) {
           <span className='item-txt'>Name</span>
         </div>
 
-        <div className='sn'>Serial number</div>
-        <div className='date'>Date</div>
+        <div className='sn header'>Serial number</div>
+        <div className='date header'>Date</div>
 
+        {items?.map(i => <RowStockTable
+          key={i._id}
+          item={i}
+          showCheckBox={memoShowCheckBox}
+          handleCheckBox={handleCheckBox}
+          showModal={showModal}
+          selected={selectedItems?.some(si => si._id === i._id)} />)}
 
       </div>
-      {items?.map(i => <RowStockTable
-        key={i._id}
-        item={i}
-        showCheckBox={memoShowCheckBox}
-        handleCheckBox={handleCheckBox}
-        showModal={showModal}
-        selected={selectedItems?.some(si => si._id === i._id)} />)}
+
     </div>
   )
 }

@@ -32,9 +32,8 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
 
 
   return (
-    <div className={cn('table table-row', { 'selected': selected })}>
-
-      <div className='item grid-col-3'>
+    <>
+      <div className={cn('row item grid-col-3', { 'selected': selected })}>
         {showCheckBox &&
           <div className='checkbox'>
             <input
@@ -60,11 +59,11 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
         </span>
       </div>
 
-      <div className='sn'>{item.serialNumber} </div>
-      <div className='date'>
+      <div className={cn('row sn', { 'selected': selected })}>{item.serialNumber} </div>
+      <div className={cn('row date', { 'selected': selected })}>
         {new Date(item.timestamp).toLocaleDateString('en-GB')}
       </div>
-    </div>
+    </>
   )
 }
 

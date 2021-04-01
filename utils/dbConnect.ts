@@ -1,4 +1,8 @@
 import mongoose from 'mongoose'
+import '../model/Location'
+import '../model/User'
+import '../model/Item'
+import '../model/History'
 
 async function dbConnect() {
   console.log('invoke dbConnect()');

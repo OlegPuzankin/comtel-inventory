@@ -10,9 +10,9 @@
   grid-template-columns: minmax(350px, 3fr) repeat(4, minmax(150px, 1fr));
   align-items: stretch;
 
-  & > * {
-    border-right: 1px solid black;
-  }
+  // & > * {
+  //   border-right: 1px solid black;
+  // }
 
   .header {
     text-transform: uppercase;
@@ -30,9 +30,9 @@
       background-color: lighten($pr-ocean, 15);
     }
 
-    &:hover {
-      background-color: lighten($pr-ocean, 30);
-    }
+    // &:hover {
+    //   background-color: lighten($pr-ocean, 30);
+    // }
   }
 
   .item {
@@ -73,7 +73,7 @@
     }
 
     .edit-btn {
-      background-color: lighten($pr-ocean, 30);
+      background-color: #fff;
       display: none;
       position: absolute;
       top: 0;

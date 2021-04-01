@@ -42,8 +42,8 @@ export function ItemsLocationTable({ items }: Props) {
 
   return (
     <div className='table-wrapper'>
-      <div className='table table-header'>
-        <div className='item grid-col-2'>
+      <div className='table-grid'>
+        <div className='item header grid-col-2'>
           {
             memoShowCheckBox &&
             <div className='checkbox'>
@@ -57,18 +57,19 @@ export function ItemsLocationTable({ items }: Props) {
 
         </div>
         {/* <div className='sn flex-20'>Serial number</div> */}
-        <div className='responsible'>Responsible</div>
-        <div className='status'>Status</div>
-        <div className='date'>Date</div>
+        <div className='responsible header'>Responsible</div>
+        <div className='status header'>Status</div>
+        <div className='date header'>Date</div>
+
+        {items?.map(i => <RowLocationTable
+          key={i._id}
+          item={i}
+          showCheckBox={memoShowCheckBox}
+          handleCheckBox={handleItemCheckbox}
+          showModal={showModal}
+          selected={selectedItems?.some(si => si._id === i._id)} />)
+        }
       </div>
-      {items?.map(i => <RowLocationTable
-        key={i._id}
-        item={i}
-        showCheckBox={memoShowCheckBox}
-        handleCheckBox={handleItemCheckbox}
-        showModal={showModal}
-        selected={selectedItems?.some(si => si._id === i._id)} />)
-      }
     </div>
   )
 }

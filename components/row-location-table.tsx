@@ -31,9 +31,8 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
 
 
   return (
-    <div className={cn('table table-row', { 'selected': selected })}>
-
-      <div className='item grid-col-2' >
+    <>
+      <div className={cn('row item grid-col-2', { 'selected': selected })} >
         {showCheckBox &&
           <div className='checkbox'>
             <input type='checkbox' checked={selected} onChange={() => handleCheckBox(selected, item)} />
@@ -56,10 +55,10 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
         </span>
       </div>
 
-      <div className='responsible'>{item.responsiblePerson?.name}</div>
-      <div className='status'>{statusDic[item.status]}</div>
-      <div className='date'>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
-    </div>
+      <div className={cn('row responsible', { 'selected': selected })}>{item.responsiblePerson?.name}</div>
+      <div className={cn('row status', { 'selected': selected })}>{statusDic[item.status]}</div>
+      <div className={cn('row date', { 'selected': selected })}>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
+    </>
 
   )
 }
