@@ -8,7 +8,6 @@ export function getItemText(item: ItemDoc) {
   }
 
   if (item.quantity > 1) {
-    console.log(item, item.quantity);
     arrText.push(`${item.quantity} ${item.measure}`)
   }
   return arrText.join(', ')

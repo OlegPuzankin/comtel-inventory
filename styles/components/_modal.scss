@@ -7,55 +7,71 @@
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(2px);
-  visibility: hidden;
-  opacity: 0;
+  // visibility: hidden;
+  // opacity: 0;
 
-  &--visible {
-    visibility: visible;
-    opacity: 1;
-  }
+  // &--visible {
+  //   visibility: visible;
+  //   opacity: 1;
+  // }
 }
 
 .modal {
   max-width: 90%;
   max-height: 90%;
+  border: 1px solid $pr-ocean;
   background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
-  transition: transform 0.35s, opacity 0.2s;
-  visibility: hidden;
-  opacity: 0;
+  transform: translate(-50%, -50%);
+  // transition: transform 0.35s, opacity 0.2s;
+  // visibility: hidden;
+  // opacity: 0;
   overflow: auto;
   border-radius: 10px;
   box-shadow: rgb(43 44 57 / 14%) 0px 6px 20px;
   width: 480px;
+  animation: appearance 0.2s normal;
 
-  &--visible {
-    transform: translate(-50%, -50%);
-    visibility: visible;
-    opacity: 1;
-  }
+  // &--visible {
+  //   transform: translate(-50%, -50%);
+  //   visibility: visible;
+  //   opacity: 1;
+  // }
 
   &-header {
     font-size: 1.25rem;
     text-align: center;
     padding: 0.75rem 0;
-    background-color: $pr-ocean;
-    color: #fff;
+    // background-color: $pr-ocean;
+    // color: #fff;
     text-transform: uppercase;
     margin-bottom: 2rem;
+    border-bottom: 1px solid $pr-ocean;
   }
 
   .form {
-    // flex-direction: column;
-    padding: 0 2rem;
+    .fields {
+      padding: 0 2rem;
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
 
     &-buttons {
-      padding: 0.5rem 2rem 1rem;
+      border-top: 1px solid $pr-ocean;
+      margin-top: 1.5rem;
+      height: 3rem;
+
       display: flex;
-      justify-content: space-between;
+      & > * {
+        flex-basis: 100%;
+      }
+      & > *:not(:last-child) {
+        border-right: 1px solid $pr-ocean;
+      }
+      // justify-content: space-between;
     }
   }
 
@@ -91,5 +107,19 @@
         background-color: darken($pr-punch, 10);
       }
     }
+  }
+}
+
+@keyframes appearance {
+  from {
+    opacity: 0;
+    // transform: translateX(50%);
+    transform: translate(-50%, -40%);
+  }
+
+  to {
+    opacity: 1;
+    // transform: translateX(50%);
+    transform: translate(-50%, -50%);
   }
 }

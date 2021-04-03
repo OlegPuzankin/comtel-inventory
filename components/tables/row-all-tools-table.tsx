@@ -1,22 +1,14 @@
 import React from 'react';
-import { ItemDoc } from '../model/Item';
-import { FileIcon } from './icons/file-icon';
-import cn from 'classnames'
 import { useRouter } from 'next/router'
-import { CheckBox } from './ui/check-box';
 import { useSession } from 'next-auth/client';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { statusDic } from '../utils/statusDictionary';
-import { ItemImagePreview } from './item-image-preview';
-import { getItemText } from '../utils/getItemText';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ItemDoc } from '../../model/Item';
+import { getItemText } from '../../utils/getItemText';
+import { statusDic } from '../../utils/statusDictionary';
+import { FileIcon } from '../icons/file-icon';
+import { ItemImagePreview } from '../item-image-preview';
 
 
-
-// const statusDic = {
-//   pending: 'Очікує видачі',
-//   onLocation: 'Видано',
-//   onStock: "Склад"
-// }
 
 interface Props {
   item: ItemDoc,

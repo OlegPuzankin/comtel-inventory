@@ -1,7 +1,7 @@
 import React from 'react';
-import { useActions } from '../hooks/useActions';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { ItemDoc } from '../model/Item';
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ItemDoc } from '../../model/Item';
 import { RowAllToolsTable } from './row-all-tools-table';
 
 interface Props {

@@ -1,3 +1,4 @@
+import { HistoryDoc } from '../model/History';
 import { ItemDoc } from '../model/Item';
 import { LocationDoc } from '../model/Location';
 import { UserDoc } from '../model/User';
@@ -18,6 +19,10 @@ export interface GetItemResponse {
 export interface GetUsersResponse {
   success: boolean
   data: Array<UserDoc>
+}
+export interface GetHistoriesResponse {
+  success: boolean
+  data: Array<HistoryDoc>
 }
 
 export interface GetPresignURLResponse {

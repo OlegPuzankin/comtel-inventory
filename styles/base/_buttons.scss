@@ -51,3 +51,12 @@
     background-color: darken($color: $pr-warm, $amount: 5);
   }
 }
+.btn-transparent {
+  border-radius: unset;
+  background-color: transparent;
+  color: #000;
+  &:hover,
+  &:active {
+    background-color: darken($color: $pr-ocean, $amount: 5);
+  }
+}

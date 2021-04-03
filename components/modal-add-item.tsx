@@ -4,20 +4,16 @@ import { TextInput } from './ui/text-input';
 import * as Yup from "yup";
 import axios from 'axios';
 import { Select } from './ui/select';
-import cn from 'classnames'
 import { mutate } from 'swr';
 import { LocationDoc } from '../model/Location';
-import { CustomFileInput } from './ui/custom-file-input';
 import { Loader } from './loader';
 import { loadImage } from '../utils/loadImage';
 import { ItemType } from '../interfaces/common_interfaces';
 import { measureUnits } from '../utils/measureUnits';
+import { useActions } from '../hooks/useActions';
 
 interface Props {
-  show: boolean,
-  close: () => void
   data: Array<LocationDoc>
-
 }
 
 
@@ -32,7 +28,8 @@ const itemTypes = [
   },]
 
 
-export function ModalAddItem({ show, close, data }: Props) {
+export function ModalAddItem({ data }: Props) {
+  const { closeModal } = useActions()
 
   const [loading, setLoading] = React.useState(false)
   const [image, setImage] = React.useState<File>(null)
@@ -84,44 +81,54 @@ export function ModalAddItem({ show, close, data }: Props) {
 
 
   return (
-    <div className={cn('modal-backdrop', { 'modal-backdrop--visible': show })}>
-      <div className={cn('modal', { 'modal--visible': show })}>
+    <div className='modal-backdrop'>
+      <div className='modal'>
         <div className='modal-header'>Add item</div>
         <form onSubmit={formik.handleSubmit} className='form'>
-          <TextInput
-            label={`item's name`}
+          <div className='fields'>
+            <div className='grid-col-3'>
+              <TextInput
+                label={`item's name`}
 
-            error={formik.touched.name && formik.errors.name}
-            inputProps={{
-              onChange: formik.handleChange,
-              onBlur: formik.handleBlur,
-              name: 'name',
-              value: formik.values.name,
+                error={formik.touched.name && formik.errors.name}
+                inputProps={{
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  name: 'name',
+                  value: formik.values.name,
 
-            }} />
-          <Select
-            label='select location'
-            error={formik.touched.location && formik.errors.location}
-            items={data?.map(l => ({ value: l._id, displayText: l.name }))}
-            selectProps={{
-              onChange: formik.handleChange,
-              onBlur: formik.handleBlur,
-              name: 'location',
-              value: formik.values.location
-            }}
-          />
-          <div className='grid'>
-            <Select
-              label='select type'
-              error={formik.touched.type && formik.errors.type}
-              items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
-              selectProps={{
-                onChange: formik.handleChange,
-                onBlur: formik.handleBlur,
-                name: 'type',
-                value: formik.values.type
-              }}
-            />
+                }} />
+            </div>
+
+            <div className='grid-col-3'>
+              <Select
+                label='select location'
+                error={formik.touched.location && formik.errors.location}
+                items={data?.map(l => ({ value: l._id, displayText: l.name }))}
+                selectProps={{
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  name: 'location',
+                  value: formik.values.location
+                }}
+              />
+            </div>
+
+            <div className='grid-col-2'>
+              <Select
+                label='select type'
+                error={formik.touched.type && formik.errors.type}
+                items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
+                selectProps={{
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  name: 'type',
+                  value: formik.values.type
+                }}
+              />
+            </div>
+
+
             <Select
               label='meas.unit'
               error={formik.touched.measure && formik.errors.measure}
@@ -135,17 +142,17 @@ export function ModalAddItem({ show, close, data }: Props) {
             />
           </div>
 
-
-          {/* <CustomFileInput fileName={image?.name} onChangeHandler={onFileSelect} /> */}
-          <div className='form-buttons mt-1'>
-            <button className='btn btn-navy py-1' type='submit'>add item</button>
-            <button className='btn btn-punch py-1' type='button' onClick={close}>cancel</button>
+          <div className='form-buttons'>
+            {/* <div>add item</div>
+            <div>cancel</div> */}
+            <button className='btn btn-transparent' type='submit'>add item</button>
+            <button className='btn btn-transparent' type='button' onClick={closeModal}>cancel</button>
           </div>
         </form>
 
       </div>
 
-      {loading && <div className='container'>
+      {loading && <div className='loader-container'>
         <Loader />
       </div>}
 

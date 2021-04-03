@@ -1,11 +1,12 @@
 import React from 'react'
-import { useGetItems, useGetLocations } from '../hooks/swr'
+import { useGetHistory, useGetItems, useGetLocations } from '../hooks/swr'
 import { LocationItem } from './location-item'
 import { useActions } from '../hooks/useActions'
 import { useTypedSelector } from '../hooks/useTypedSelector'
 import cn from 'classnames'
 import { getCountItems } from '../utils/getCountItems'
 import { LocationType } from '../interfaces/common_interfaces'
+import Link from 'next/link'
 
 // interface Location extends LocationDoc {
 //   countItems: number
@@ -17,6 +18,8 @@ export function LocationsList() {
   const { data: locations } = useGetLocations()
   const { data: items } = useGetItems()
   const selectedLocation = useTypedSelector(state => state.main.location)
+
+
 
   return (
     <div className='location-list'>
@@ -42,7 +45,13 @@ export function LocationsList() {
         })}
 
       </div>
+      <hr />
 
+      <Link href="/history">
+        <a className="link-history-page">
+          History
+          </a>
+      </Link>
     </div>
   )
 }

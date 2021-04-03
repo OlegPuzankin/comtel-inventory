@@ -22,13 +22,8 @@ export function LocationItem({ location, setLocation, countItems, isSelected }: 
 
   return (
     <div className={css} onClick={() => setLocation(location)}>
-      {/* <div className='folder-icon'>
-        <FolderIcon />
-      </div> */}
       <span className='location-name'>{location.name} </span>
       {countItems > 0 && <span className='countItems'>{countItems}</span>}
     </div>
-
   )
-
 }

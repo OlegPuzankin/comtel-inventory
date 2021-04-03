@@ -1,6 +1,9 @@
 .table-wrapper {
   overflow: auto;
   background-color: #fff;
+  // padding: 0 0.5rem;
+  margin: 0 1rem;
+  border-radius: 5px;
 }
 
 .table-grid {
@@ -141,11 +144,4 @@
     width: 100%;
     height: 100%;
   }
-}
-
-.grid-col-2 {
-  grid-column: 1 / span 2;
-}
-.grid-col-3 {
-  grid-column: 1 / span 3;
 }

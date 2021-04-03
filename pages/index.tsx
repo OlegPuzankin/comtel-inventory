@@ -14,32 +14,13 @@ import { ModalItemImage } from '../components/modal-item-image';
 import { Loader } from '../components/loader';
 
 
-// const getFetcher = (url: string) => axios.get(url).then(res => res.data)
-
-
 export default function Home() {
   const { closeModal } = useActions()
   const { show, window } = useTypedSelector(state => state.ui)
 
+  const { data: locations } = useGetLocations()
+  const { data: items } = useGetItems()
 
-
-
-  const { data: locations, isValidating: isValidatingLocations, error: errorLocations } = useGetLocations()
-  const { data: users, error: userError } = useGetUsers()
-  const { data: items, error: itemsError } = useGetItems()
-
-  // // !locations && !items
-  // console.log('l', isValidatingLocations);
-  // console.log('i', isValidatingItems);
-
-  if (errorLocations || userError || itemsError) {
-    console.log('loc--->', errorLocations, 'user--->', userError, 'items--->', itemsError);
-    return <div>
-      {errorLocations && <h1>{errorLocations}</h1>}
-      {userError && <h1>{userError}</h1>}
-      {itemsError && <h1>{itemsError}</h1>}
-    </div>
-  }
 
   if (!locations || !items) {
     return (
@@ -60,22 +41,16 @@ export default function Home() {
           <InventoryList />
         </div>
       </div>
-      {/* modal add new item */}
-      <ModalAddItem
-        show={show && window === 'item'}
-        close={closeModal}
-        data={locations?.data} />
-      <ModalLocation
-        show={show && window === 'location' || window === 'edit-location'}
-        close={closeModal}
-      />
-      <ModalItemImage
-        show={show && /^show-image/.test(window)}
-        close={() => closeModal()}
-      />
+
+      {/* modal windows */}
+      {window === 'item' && <ModalAddItem data={locations?.data} />}
+      {(window === 'location' || window === 'edit-location') && <ModalLocation />}
+      {/^show-image/.test(window) && <ModalItemImage />}
     </Layout>
   )
 }
+
+// || window === 'edit-location'
 
 // export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
 

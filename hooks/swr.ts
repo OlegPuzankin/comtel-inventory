@@ -1,6 +1,6 @@
 import axios from 'axios'
 import useSWR from 'swr'
-import { GetItemResponse, GetItemsResponse, GetLocationsResponse, GetUsersResponse } from '../interfaces/api_response'
+import { GetHistoriesResponse, GetItemResponse, GetItemsResponse, GetLocationsResponse, GetUsersResponse } from '../interfaces/api_response'
 
 const getFetcher = (url: string) => axios.get(url).then(res => res.data)
 
@@ -15,4 +15,7 @@ export function useGetItem(itemId: string) {
 }
 export function useGetUsers() {
   return useSWR<GetUsersResponse>('/api/user', getFetcher, { dedupingInterval: 50000 })
+}
+export function useGetHistory() {
+  return useSWR<GetHistoriesResponse>('/api/history', getFetcher)
 }

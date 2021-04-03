@@ -1,0 +1,16 @@
+.container {
+  width: 95%;
+  min-width: 980px;
+  margin: 0 auto;
+  // min-height: 100vh;
+}
+
+.search-input {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.history-entry {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $pr-ocean;
+}

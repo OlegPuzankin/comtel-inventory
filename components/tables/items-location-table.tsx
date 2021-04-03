@@ -1,9 +1,9 @@
 import { useSession } from 'next-auth/client';
 import React from 'react';
-import { useActions } from '../hooks/useActions';
-import { useCheckBox } from '../hooks/useCheckbox';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { ItemDoc } from '../model/Item';
+import { useActions } from '../../hooks/useActions';
+import { useCheckBox } from '../../hooks/useCheckbox';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ItemDoc } from '../../model/Item';
 import { RowLocationTable } from './row-location-table';
 
 interface Props {

@@ -19,7 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     query,
   } = req
 
-  console.log(query)
   await dbConnect()
 
   s3.deleteObject({

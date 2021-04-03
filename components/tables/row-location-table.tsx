@@ -1,10 +1,10 @@
 import React from 'react';
-import { ItemDoc } from '../model/Item';
-import { FileIcon } from './icons/file-icon';
 import cn from 'classnames'
 import { useRouter } from 'next/router'
-import { ItemImagePreview } from './item-image-preview';
-import { getItemText } from '../utils/getItemText';
+import { ItemDoc } from '../../model/Item';
+import { ItemImagePreview } from '../item-image-preview';
+import { FileIcon } from '../icons/file-icon';
+import { statusDic } from '../../utils/statusDictionary';
 
 
 
@@ -22,8 +22,7 @@ interface Props {
   showModal: Function
 }
 
-export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
-
+export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
   const router = useRouter()
 
   function navigateToEditPage() {
@@ -33,13 +32,10 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
 
   return (
     <>
-      <div className={cn('row item grid-col-3', { 'selected': selected })}>
+      <div className={cn('row item grid-col-2', { 'selected': selected })} >
         {showCheckBox &&
           <div className='checkbox'>
-            <input
-              type='checkbox'
-              checked={selected}
-              onChange={() => handleCheckBox(selected, item)} />
+            <input type='checkbox' checked={selected} onChange={() => handleCheckBox(selected, item)} />
           </div>
         }
 
@@ -51,20 +47,18 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
             </div>
         }
 
-        <span className='item-txt'>
-          {getItemText(item)}
-          <div className='edit-btn'>
+        <span className='item-txt' >
+          {item.name}
+          {!selected && <div className='edit-btn'>
             <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
-          </div>
+          </div>}
         </span>
       </div>
 
-      <div className={cn('row sn', { 'selected': selected })}>{item.serialNumber} </div>
-      <div className={cn('row date', { 'selected': selected })}>
-        {new Date(item.timestamp).toLocaleDateString('en-GB')}
-      </div>
+      <div className={cn('row responsible', { 'selected': selected })}>{item.responsiblePerson?.name}</div>
+      <div className={cn('row status', { 'selected': selected })}>{statusDic[item.status]}</div>
+      <div className={cn('row date', { 'selected': selected })}>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
     </>
+
   )
 }
-
-// style = {{ backgroundImage: `url(${imageUrl})` }}

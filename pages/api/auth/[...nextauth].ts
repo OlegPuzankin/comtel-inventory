@@ -1,9 +1,32 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
-import { useActions } from '../../../hooks/useActions';
 import { User } from '../../../model/User';
 import dbConnect from '../../../utils/dbConnect';
+const allowedEmails = [
+  'oleg.puzankin@gmail.com',
+  'sah4etv@gmail.com',
+]
+function checkAllowedEmails(email: string) {
+  if (/@comtel.ua$/.test(email) || /@rfs.kiev.ua$/.test(email)) {
+    console.log('comtel.ua or rfs.kiev.ua domain email');
+    return true
+  }
+
+  const allowedEmails = [
+    'oleg.puzankin@gmail.com',
+    'sah4etv@gmail.com',
+  ]
+
+  if (allowedEmails.includes(email)) {
+    console.log('other allowed gmail users');
+    return true
+  }
+
+  return false
+}
+
+
 
 const options: InitOptions = {
   // Configure one or more authentication providers
@@ -19,6 +42,10 @@ const options: InitOptions = {
     signIn: async (user, account, profile) => {
       await dbConnect()
 
+      if (!checkAllowedEmails(user.email)) {
+        return false
+      }
+
       let _user = await User.findOne({ email: user.email })
 
       if (!_user) {
@@ -32,7 +59,6 @@ const options: InitOptions = {
       return true
     },
     async session(session, user) {
-      // console.log('session invoke', session, user)
       await dbConnect()
       const _user = await User.findOne({ email: user.email })
       //@ts-ignore

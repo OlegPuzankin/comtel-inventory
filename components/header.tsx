@@ -4,21 +4,13 @@ import { GoogleIcon } from './icons/google-icon';
 
 const Header = () => {
   const [session, loading] = useSession();
-
-
-
-  function signGoogle() {
-    signIn('google')
-  }
+  // function signGoogle() {
+  //   signIn('google')
+  // }
 
   function signOut() {
     signout()
   }
-
-  // (session?.user?.admin);
-
-
-
   return (
     <header>
       <nav>
@@ -31,9 +23,11 @@ const Header = () => {
 
         <div>
           {!session && (
-            <button onClick={signGoogle} className="btn btn-punch">
-              <GoogleIcon />
-              <span className='ml-1'>Sign with Google</span>
+            <button onClick={() => signIn('google')} className="btn btn-punch">
+              <div className='sign-with-google'>
+                <GoogleIcon />
+                <span>Sign with Google</span>
+              </div>
             </button>
           )}
           {session && (

@@ -15,26 +15,17 @@ import { getCountItems } from '../utils/getCountItems';
 import { Loader } from './loader';
 import { LocationType } from '../interfaces/common_interfaces';
 
-interface Props {
-  show: boolean,
-  close: () => void
-
-}
 
 
 const locationTypes = ['stock', 'location']
 
-export function ModalLocation({ show, close }: Props) {
+export function ModalLocation() {
+  const { closeModal } = useActions()
   const [loading, setLoading] = React.useState(false)
   const { window } = useTypedSelector(state => state.ui)
   const { location } = useTypedSelector(state => state.main)
   const { data: items } = useGetItems()
   const { setLocation } = useActions()
-
-  // console.log(location);
-
-
-
 
   const formik = useFormik({
     initialValues: {
@@ -68,7 +59,7 @@ export function ModalLocation({ show, close }: Props) {
             formik.resetForm()
             mutate('/api/location')
             setLoading(false)
-            close()
+            closeModal()
           }
         }
       } catch {
@@ -80,7 +71,7 @@ export function ModalLocation({ show, close }: Props) {
 
   function cancel() {
     formik.resetForm()
-    close()
+    closeModal()
   }
 
   async function deleteLocation() {
@@ -90,7 +81,7 @@ export function ModalLocation({ show, close }: Props) {
       mutate('/api/location')
       setLocation(null)
       setLoading(false)
-      close()
+      closeModal()
     } catch (e) {
       setLoading(false)
       console.log(e)
@@ -107,8 +98,8 @@ export function ModalLocation({ show, close }: Props) {
   }, [window])
 
   return (
-    <div className={cn('modal-backdrop', { 'modal-backdrop--visible': show })}>
-      <div className={cn('modal', { 'modal--visible': show })}>
+    <div className='modal-backdrop'>
+      <div className='modal'>
         <div className='modal-header'>
           {window === 'location'
             ? 'Add location'
@@ -116,45 +107,50 @@ export function ModalLocation({ show, close }: Props) {
           }
         </div>
         <form onSubmit={formik.handleSubmit} className='form'>
-          <TextInput
-            label={`location's name`}
+          <div className='fields'>
+            <div className="grid-col-2">
+              <TextInput
+                label={`location's name`}
 
-            error={formik.touched.name && formik.errors.name}
-            inputProps={{
-              onChange: formik.handleChange,
-              onBlur: formik.handleBlur,
-              name: 'name',
-              value: formik.values.name,
+                error={formik.touched.name && formik.errors.name}
+                inputProps={{
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  name: 'name',
+                  value: formik.values.name,
 
-            }} />
-          <Select
-            label='select stock type'
-            error={formik.touched.locationType && formik.errors.locationType}
-            items={locationTypes.map((l) => ({ value: l, displayText: l }))}
-            selectProps={{
-              onChange: formik.handleChange,
-              onBlur: formik.handleBlur,
-              name: 'locationType',
-              value: formik.values.locationType
-            }}
-          />
+                }} />
+            </div>
+
+            <Select
+              label='select stock type'
+              error={formik.touched.locationType && formik.errors.locationType}
+              items={locationTypes.map((l) => ({ value: l, displayText: l }))}
+              selectProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'locationType',
+                value: formik.values.locationType
+              }}
+            />
+          </div>
 
           <div className='form-buttons'>
-            <button className='btn btn-ocean py-1' type='submit'>
+            <button className='btn btn-transparent' type='submit'>
               {window === 'location'
                 ? 'Add location'
                 : 'Update Location'
               }
             </button>
-            <button className='btn btn-punch py-1' type='button' onClick={cancel}>cancel</button>
-            {canDelete() && <button className='btn btn-navy py-1' type='button' onClick={deleteLocation}>delete</button>}
+            <button className='btn btn-transparent' type='button' onClick={cancel}>cancel</button>
+            {canDelete() && <button className='btn btn-transparent' type='button' onClick={deleteLocation}>delete</button>}
           </div>
         </form>
 
 
       </div>
 
-      {loading && <div className='container'>
+      {loading && <div className='loader-container'>
         <Loader />
       </div>}
     </div>

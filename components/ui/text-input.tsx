@@ -1,12 +1,12 @@
 import cn from 'classnames'
 interface Props {
   label: string,
-  error: string;
+  error?: string;
 
   inputProps: {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
-    name: string,
+    name?: string,
     value: string,
     placeholder?: string
     type?: string
