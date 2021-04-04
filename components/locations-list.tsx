@@ -7,6 +7,7 @@ import cn from 'classnames'
 import { getCountItems } from '../utils/getCountItems'
 import { LocationType } from '../interfaces/common_interfaces'
 import Link from 'next/link'
+import { HistoryIcon } from './icons/history-icon'
 
 // interface Location extends LocationDoc {
 //   countItems: number
@@ -47,11 +48,18 @@ export function LocationsList() {
       </div>
       <hr />
 
-      <Link href="/history">
-        <a className="link-history-page">
-          History
+      <div className='history'>
+        <div className='history-icon'>
+          <HistoryIcon />
+        </div>
+        <Link href="/history">
+          <a className="history-link">
+            history
           </a>
-      </Link>
+        </Link>
+      </div>
+
+
     </div>
   )
 }

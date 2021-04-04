@@ -1,4 +1,7 @@
 .location-list {
+  @include respond(medium) {
+    padding-bottom: 1rem;
+  }
   .all-items {
     font-size: larger;
     display: flex;
@@ -27,8 +30,18 @@
   }
 }
 
-.link-history-page {
-  text-transform: uppercase;
+.history {
+  display: flex;
+  align-items: center;
   margin-left: 1.5rem;
-  // color: $pr-punch;
+
+  &-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &-link {
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+  }
 }

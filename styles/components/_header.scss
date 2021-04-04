@@ -20,6 +20,9 @@ nav {
   font-size: 1.25rem;
   font-weight: 600;
   text-transform: uppercase;
+  @include respond(small) {
+    font-size: 0.9rem;
+  }
 }
 
 .avatar {

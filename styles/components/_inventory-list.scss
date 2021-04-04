@@ -1,13 +1,16 @@
 .inventory-list {
-  padding: 0 1rem;
+  padding: 0 2rem;
   position: relative;
+  @include respond(medium) {
+    padding: 0 0.5rem;
+  }
 
   &-top-row {
     display: flex;
     padding: 1rem 0;
     align-items: center;
     gap: 0.5rem;
-    margin-left: 1rem;
+    // margin-left: 1rem;
 
     .current-location {
       display: inline-block;
@@ -21,7 +24,7 @@
 
     .add-new-btn {
       margin-left: auto;
-      margin-right: 1rem;
+      // margin-right: 1rem;
     }
   }
 }
