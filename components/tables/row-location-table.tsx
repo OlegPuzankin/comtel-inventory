@@ -7,13 +7,6 @@ import { FileIcon } from '../icons/file-icon';
 import { statusDic } from '../../utils/statusDictionary';
 
 
-
-// const statusDic = {
-//   pending: 'Очікує видачі',
-//   onLocation: 'Видано',
-//   onStock: "Склад"
-// }
-
 interface Props {
   item: ItemDoc,
   selected: boolean,
@@ -43,7 +36,9 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
           item.imageKey
             ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
             : <div className='item-img' >
-              <FileIcon cssClassName='file-icon' />
+              <div className="file-icon">
+                <FileIcon />
+              </div>
             </div>
         }
 

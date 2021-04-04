@@ -11,21 +11,11 @@ import { loadImage } from '../utils/loadImage';
 import { ItemType } from '../interfaces/common_interfaces';
 import { measureUnits } from '../utils/measureUnits';
 import { useActions } from '../hooks/useActions';
+import { itemTypes } from '../utils/itemsType';
 
 interface Props {
   data: Array<LocationDoc>
 }
-
-
-const itemTypes = [
-  {
-    value: ItemType.Tool,
-    displayText: 'Інструмент'
-  },
-  {
-    value: ItemType.Materail,
-    displayText: 'Матеріали'
-  },]
 
 
 export function ModalAddItem({ data }: Props) {
@@ -70,14 +60,6 @@ export function ModalAddItem({ data }: Props) {
     }
   })
 
-  // React.useEffect(() => {
-  //   formik.setFieldValue('location', location?._id)
-  // }, [location])
-
-  // function onFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
-  //   debugger
-  //   setImage(e.target.files[0])
-  // }
 
 
   return (

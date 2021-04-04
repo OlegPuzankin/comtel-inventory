@@ -6,11 +6,12 @@
     font-size: larger;
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem 1.75rem;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     cursor: pointer;
     // justify-content: space-between;
+    &:hover,
     &-selected {
       // color: purple;
       background-color: $pr-punch;

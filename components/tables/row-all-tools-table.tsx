@@ -42,7 +42,9 @@ export function RowAllToolsTable({ item, showModal }: Props) {
           item.imageKey
             ? <ItemImagePreview showModal={showModal} imageKey={item.imageKey} />
             : <div className='item-img' >
-              <FileIcon cssClassName='file-icon' />
+              <div className="file-icon">
+                <FileIcon />
+              </div>
             </div>
         }
 

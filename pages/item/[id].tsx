@@ -15,6 +15,7 @@ import { ImageUploadInput } from '../../components/ui/image-upload-input';
 import { getSession } from 'next-auth/client';
 import { GetItemResponse, PutItemResponse } from '../../interfaces/api_response';
 import { measureUnits } from '../../utils/measureUnits';
+import { itemTypes } from '../../utils/itemsType';
 
 
 function EditItem() {
@@ -42,7 +43,8 @@ function EditItem() {
           desc: item?.desc || '',
           quantity: item?.quantity,
           measure: item?.measure,
-          serialNumber: item?.serialNumber || ''
+          serialNumber: item?.serialNumber || '',
+          type: item.type
         })
         setLoading(false)
       } else {
@@ -63,7 +65,8 @@ function EditItem() {
       desc: '',
       quantity: 1,
       measure: '',
-      serialNumber: ''
+      serialNumber: '',
+      type: ''
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Field can not be empty"),
@@ -134,102 +137,97 @@ function EditItem() {
         {msg && <div className='msg' onClick={() => setMsg('')}>{msg}</div>}
 
         <form onSubmit={formik.handleSubmit} className='edit-item-form'>
-          <div className='row'>
-            <div className='flex-60'>
-              {/* NAME */}
+          <div className='left-side'>
+            {/* NAME */}
+            <TextInput
+              label='name'
+              error={formik.touched.name && formik.errors.name}
+              inputProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'name',
+                value: formik.values.name,
+              }} />
+            {/* DESC */}
+            <TextInput
+              label='description'
+
+              error={formik.touched.serialNumber && formik.errors.serialNumber}
+              inputProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'desc',
+                value: formik.values.desc,
+
+              }} />
+
+            <TextInput
+              label='serial number'
+              error={formik.touched.serialNumber && formik.errors.serialNumber}
+              inputProps={{
+                onChange: formik.handleChange,
+                onBlur: formik.handleBlur,
+                name: 'serialNumber',
+                value: formik.values.serialNumber,
+              }} />
+
+
+            <div className="sub-grid">
               <TextInput
-                label='name'
-                error={formik.touched.name && formik.errors.name}
+                label='quantity'
+                error={formik.touched.quantity && formik.errors.quantity}
                 inputProps={{
                   onChange: formik.handleChange,
                   onBlur: formik.handleBlur,
-                  name: 'name',
-                  value: formik.values.name,
+                  name: 'quantity',
+                  value: formik.values.quantity?.toString(),
+                  type: 'number'
                 }} />
-              {/* DESC */}
-              <TextInput
-                label='description'
 
-                error={formik.touched.serialNumber && formik.errors.serialNumber}
-                inputProps={{
+              <Select
+                label='meas.unit'
+                error={formik.touched.measure && formik.errors.measure}
+                items={measureUnits.map(mu => ({ value: mu.value, displayText: mu.displayText }))}
+                selectProps={{
                   onChange: formik.handleChange,
                   onBlur: formik.handleBlur,
-                  name: 'desc',
-                  value: formik.values.desc,
+                  name: 'measure',
+                  value: formik.values.measure
+                }}
+              />
+              <Select
+                label='select type'
+                error={formik.touched.type && formik.errors.type}
+                items={itemTypes.map(itemType => ({ value: itemType.value, displayText: itemType.displayText }))}
+                selectProps={{
+                  onChange: formik.handleChange,
+                  onBlur: formik.handleBlur,
+                  name: 'type',
+                  value: formik.values.type
+                }}
+              />
+              <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>назад</button>
+              <button className='btn btn-navy' type='submit'>update</button>
+              <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>
 
-                }} />
-              <div className='row'>
-                {/* SERAIL NUMBER */}
-                <div className='flex-60'>
-                  <TextInput
-                    label='serial number'
-                    error={formik.touched.serialNumber && formik.errors.serialNumber}
-                    inputProps={{
-                      onChange: formik.handleChange,
-                      onBlur: formik.handleBlur,
-                      name: 'serialNumber',
-                      value: formik.values.serialNumber,
-                    }} />
-                </div>
-
-                {/* QUANTITY */}
-                <div className='flex-20'>
-                  <TextInput
-                    label='quantity'
-                    error={formik.touched.quantity && formik.errors.quantity}
-                    inputProps={{
-                      onChange: formik.handleChange,
-                      onBlur: formik.handleBlur,
-                      name: 'quantity',
-                      value: formik.values.quantity?.toString(),
-                      type: 'number'
-                    }} />
-                </div>
-
-                <div className='flex-20'>
-                  <Select
-                    label='meas.unit'
-                    error={formik.touched.measure && formik.errors.measure}
-                    items={measureUnits.map(mu => ({ value: mu.value, displayText: mu.displayText }))}
-                    selectProps={{
-                      onChange: formik.handleChange,
-                      onBlur: formik.handleBlur,
-                      name: 'measure',
-                      value: formik.values.measure
-                    }}
+            </div>
+          </div>
+          <div className='right-side'>
+            <div className='image-col'>
+              <span>item's image</span>
+              {
+                item.imageKey
+                  ? <div className='item-img' style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_AWS_BUCKET_URL}/${item.imageKey})` }}>
+                    <div className='delete-img-btn' onClick={deleteImage}>delete image</div>
+                  </div>
+                  : <ImageUploadInput
+                    imageURL={imageURL}
+                    setImageURL={setImageURL}
+                    onChangeHandler={onFileSelect}
                   />
-                </div>
-              </div>
-            </div>
-            <div className='flex-40 '>
-              <div className='ml-auto'>
-                <div className='image-col'>
-                  <span>item's image</span>
-                  {
-                    item.imageKey
-                      ? <div className='item-img' style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_AWS_BUCKET_URL}/${item.imageKey})` }}>
-                        <div className='delete-img-btn' onClick={deleteImage}>delete image</div>
-                      </div>
-                      : <ImageUploadInput
-                        imageURL={imageURL}
-                        setImageURL={setImageURL}
-                        onChangeHandler={onFileSelect}
-                      />
-                  }
-                </div>
-              </div>
-
+              }
             </div>
           </div>
-
-
-          <div className='row'>
-            <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>назад</button>
-            <button className='btn btn-navy' type='submit'>update</button>
-            <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>
-          </div>
-
-
         </form>
         {loading && <div className='loader-container'>
           <Loader />

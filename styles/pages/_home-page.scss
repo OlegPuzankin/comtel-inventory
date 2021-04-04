@@ -10,10 +10,9 @@
 .locations {
   color: #fff;
   background-color: $pr-ocean;
-
-  // min-width: 20%;
-  // min-height: 90vh;
-  // padding: 1rem 0.5em;
+  @include respond(medium) {
+    display: none;
+  }
 }
 
 .items {

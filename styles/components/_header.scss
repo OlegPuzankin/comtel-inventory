@@ -1,12 +1,13 @@
 header {
   border-bottom: 1px solid $pr-navy;
   padding: 1rem 0;
-  height: 10vh;
+  // padding: 2rem 0;
   display: flex;
   align-items: center;
 }
 
 nav {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,8 +21,14 @@ nav {
   font-size: 1.25rem;
   font-weight: 600;
   text-transform: uppercase;
-  @include respond(small) {
-    font-size: 0.9rem;
+  // @include respond(small) {
+  //   font-size: 0.9rem;
+  // }
+}
+
+.auth {
+  @include respond(medium) {
+    display: none;
   }
 }
 
@@ -54,4 +61,43 @@ nav {
   grid-template-columns: repeat(2, auto);
   gap: 0.5rem;
   align-items: center;
+}
+
+.toggle-menu-button {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  // height: 100%;
+
+  right: 0;
+  display: none;
+  cursor: pointer;
+
+  @include respond(medium) {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.toggle-menu {
+  position: fixed;
+  color: #fff;
+  min-width: 250px;
+  height: 100vh;
+  // top: 0;
+  // right: 0;
+  left: -100%;
+  // bottom: 0;
+  background-color: $pr-ocean;
+  z-index: 100;
+  transition: all 0.2s;
+  display: none;
+
+  &-show {
+    left: 0;
+  }
+
+  @include respond(medium) {
+    display: unset;
+  }
 }
