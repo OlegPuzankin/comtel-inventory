@@ -5,7 +5,7 @@ import { useActions } from '../hooks/useActions'
 import { useTypedSelector } from '../hooks/useTypedSelector'
 import cn from 'classnames'
 import { getCountItems } from '../utils/getCountItems'
-import { LocationType } from '../interfaces/common_interfaces'
+import { ItemType, LocationType } from '../interfaces/common_interfaces'
 import Link from 'next/link'
 import { HistoryIcon } from './icons/history-icon'
 
@@ -25,16 +25,16 @@ export function LocationsList() {
   return (
     <div className='location-list'>
 
-      <div
-        onClick={() => setLocation(null)}
-        className={cn('all-items', { 'all-items-selected': !selectedLocation })}>
-        {/* <div className='open-folder-icon'>
-          <OpenFolderIcon />
-        </div> */}
-        <span>All tools</span>
-      </div>
+
 
       <div className='location-list-entries'>
+        <div
+          onClick={() => setLocation(null)}
+          className={cn('all-tools location-item', { 'location-item-selected': !selectedLocation })}>
+          <span>all tools</span>
+          <span className='countItems'>{items?.data.filter(i => i.type === ItemType.Tool).length}</span>
+        </div>
+
         {locations?.data.map(location => {
           return <LocationItem
             key={location._id}

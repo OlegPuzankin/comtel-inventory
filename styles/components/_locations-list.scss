@@ -2,32 +2,15 @@
   @include respond(medium) {
     padding-bottom: 1rem;
   }
-  .all-items {
-    font-size: larger;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1.75rem;
-    margin-bottom: 0.5rem;
+  .all-tools {
+    // padding: 0.5rem 1.75rem;
+    padding-left: 1.5rem;
     text-transform: uppercase;
-    cursor: pointer;
-    // justify-content: space-between;
-    &:hover,
-    &-selected {
-      // color: purple;
-      background-color: $pr-punch;
-      // font-weight: 700;
-      // text-decoration: underline;
-    }
+    margin-top: 0.25rem;
   }
 
   &-entries {
     margin-right: 0.5rem;
-  }
-
-  .open-folder-icon {
-    width: 1.5rem;
-    // height: auto;
-    margin-right: 1rem;
   }
 }
 
