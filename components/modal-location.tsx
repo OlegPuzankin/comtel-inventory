@@ -14,6 +14,7 @@ import { PutLocationResponse } from '../interfaces/api_response';
 import { getCountItems } from '../utils/getCountItems';
 import { Loader } from './loader';
 import { LocationType } from '../interfaces/common_interfaces';
+import { LoaderLinear } from './loader-linear';
 
 
 
@@ -100,12 +101,17 @@ export function ModalLocation() {
   return (
     <div className='modal-backdrop'>
       <div className='modal'>
+        {loading && <div className='loader-linear-container'> <LoaderLinear /></div>}
+
         <div className='modal-header'>
-          {window === 'location'
-            ? 'Add location'
-            : 'Edit Location'
+          {
+            window === 'location'
+              ? 'Add location'
+              : 'Edit Location'
           }
+
         </div>
+
         <form onSubmit={formik.handleSubmit} className='form'>
           <div className='fields'>
             <div className="grid-col-2">
@@ -123,7 +129,7 @@ export function ModalLocation() {
             </div>
 
             <Select
-              label='select stock type'
+              label='location type'
               error={formik.touched.locationType && formik.errors.locationType}
               items={locationTypes.map((l) => ({ value: l, displayText: l }))}
               selectProps={{
@@ -136,23 +142,25 @@ export function ModalLocation() {
           </div>
 
           <div className='form-buttons'>
-            <button className='btn btn-transparent' type='submit'>
+
+            <div className='form-btn' onClick={() => formik.submitForm()}>
               {window === 'location'
                 ? 'Add location'
                 : 'Update Location'
               }
-            </button>
-            <button className='btn btn-transparent' type='button' onClick={cancel}>cancel</button>
-            {canDelete() && <button className='btn btn-transparent' type='button' onClick={deleteLocation}>delete</button>}
+            </div>
+
+            {canDelete() && <div className='form-btn' onClick={deleteLocation}>delete</div>}
+            <div className='form-btn' onClick={cancel}>Cancel</div>
           </div>
         </form>
 
 
       </div>
 
-      {loading && <div className='loader-container'>
+      {/* {loading && <div className='loader-container'>
         <Loader />
-      </div>}
+      </div>} */}
     </div>
   )
 }

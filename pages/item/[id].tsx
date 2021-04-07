@@ -16,10 +16,11 @@ import { getSession } from 'next-auth/client';
 import { GetItemResponse, PutItemResponse } from '../../interfaces/api_response';
 import { measureUnits } from '../../utils/measureUnits';
 import { itemTypes } from '../../utils/itemsType';
+import { LoaderLinear } from '../../components/loader-linear';
 
 
 function EditItem() {
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(true)
   const [imageURL, setImageURL] = React.useState('')
   const [msg, setMsg] = React.useState('')
   const [item, setItem] = React.useState<ItemDoc>(null)
@@ -134,6 +135,7 @@ function EditItem() {
     <Layout title='Edit item' >
 
       <div className='edit-item'>
+        {loading && <div className='loader-linear-container'> <LoaderLinear /></div>}
         {msg && <div className='msg' onClick={() => setMsg('')}>{msg}</div>}
 
         <form onSubmit={formik.handleSubmit} className='edit-item-form'>
@@ -229,9 +231,9 @@ function EditItem() {
             </div>
           </div>
         </form>
-        {loading && <div className='loader-container'>
+        {/* {loading && <div className='loader-container'>
           <Loader />
-        </div>}
+        </div>} */}
       </div>
     </Layout>
   )

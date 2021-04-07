@@ -8,6 +8,7 @@ import { getSession } from 'next-auth/client';
 import { User, UserDoc } from '../../../model/User';
 import { ItemStatus, LocationType, } from '../../../interfaces/common_interfaces';
 import sgMail from '@sendgrid/mail'
+import { df } from '../../../utils/dateFormat';
 
 
 
@@ -42,8 +43,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await history.save()
     // sending email to admin
     // try {
-    //   if (destinationLocation.locationType === LocationType.Location)
+    //   if (destinationLocation.locationType === LocationType.Location) {
     //     await sendEmail(items, _user, destinationLocation)
+    //     console.log('email sent');
+    //   }
+
     // } catch (e) {
     //   console.error(e);
     // }
@@ -62,7 +66,7 @@ async function getMoveHistoryDescription(items: Array<ItemDoc>, destinationLocat
     return `${i.name}`
   }).join(', ')
 
-  text.push(`переміщено: ${items[0].location.name}=>${destinationLocation.name}. ${new Date().toLocaleDateString()}.`)
+  text.push(`переміщено: ${items[0].location.name} => ${destinationLocation.name}. ${df(new Date(), 'mediumDate')}.`)
   text.push(`Автор операції - ${user.name}`)
 
   return text.join(' ')
@@ -74,8 +78,8 @@ function sendEmail(items: Array<ItemDoc>, user: UserDoc, location: LocationDoc) 
 
   const msg = {
     to: 'olegp@comtel.ua',
-    from: 'oleg.puzankin@gmail.com',
-    subject: `Заявка на отримання інструмента, ${new Date().toLocaleDateString()}`,
+    from: 'comtel.inventory@gmail.com',
+    subject: `Заявка на отримання інструмента вiд ${user.name}, ${df(new Date(), 'mediumDate')}`,
     html:
       `<h3>Місце інсталляції - ${location.name}</h3>
         <p>Перелік інстурмента</>

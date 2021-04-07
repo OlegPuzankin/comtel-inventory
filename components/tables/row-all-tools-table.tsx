@@ -12,11 +12,11 @@ import { ItemImagePreview } from '../item-image-preview';
 
 interface Props {
   item: ItemDoc,
-  showModal: Function
-  // handleCheckBox: (selected: boolean, item: ItemDoc) => void
+  showModal: Function,
+  showEditButton: Boolean
 }
 
-export function RowAllToolsTable({ item, showModal }: Props) {
+export function RowAllToolsTable({ item, showModal, showEditButton }: Props) {
 
   const [session, loading] = useSession();
   const selectedLocation = useTypedSelector(state => state.main.location)
@@ -50,9 +50,9 @@ export function RowAllToolsTable({ item, showModal }: Props) {
 
         <span className='item-txt'>
           {getItemText(item)}
-          <div className='edit-btn'>
+          {showEditButton && <div className='edit-btn'>
             <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
-          </div>
+          </div>}
         </span>
 
       </div>
@@ -62,7 +62,10 @@ export function RowAllToolsTable({ item, showModal }: Props) {
         <span className='txt'>{item.location.name}</span>
       </div>
 
-      <div className='row responsible'>{item.location.locationType === 'location' && item.responsiblePerson?.name}</div>
+      <div className='row responsible'>
+        <span className="txt">{item.location.locationType === 'location' && item.responsiblePerson?.name}</span>
+      </div>
+
       <div className='row status'>{getStatusText()}</div>
     </>
   )

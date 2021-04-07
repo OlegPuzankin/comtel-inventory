@@ -67,6 +67,7 @@ export function ItemsLocationTable({ items }: Props) {
           showCheckBox={memoShowCheckBox}
           handleCheckBox={handleItemCheckbox}
           showModal={showModal}
+          showEditButton={Boolean(session?.user)}
           selected={selectedItems?.some(si => si._id === i._id)} />)
         }
       </div>

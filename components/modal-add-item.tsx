@@ -8,10 +8,10 @@ import { mutate } from 'swr';
 import { LocationDoc } from '../model/Location';
 import { Loader } from './loader';
 import { loadImage } from '../utils/loadImage';
-import { ItemType } from '../interfaces/common_interfaces';
 import { measureUnits } from '../utils/measureUnits';
 import { useActions } from '../hooks/useActions';
 import { itemTypes } from '../utils/itemsType';
+import { LoaderLinear } from './loader-linear';
 
 interface Props {
   data: Array<LocationDoc>
@@ -65,6 +65,7 @@ export function ModalAddItem({ data }: Props) {
   return (
     <div className='modal-backdrop'>
       <div className='modal'>
+        {loading && <div className='loader-linear-container'> <LoaderLinear /></div>}
         <div className='modal-header'>Add item</div>
         <form onSubmit={formik.handleSubmit} className='form'>
           <div className='fields'>
@@ -125,19 +126,12 @@ export function ModalAddItem({ data }: Props) {
           </div>
 
           <div className='form-buttons'>
-            {/* <div>add item</div>
-            <div>cancel</div> */}
-            <button className='btn btn-transparent' type='submit'>add item</button>
-            <button className='btn btn-transparent' type='button' onClick={closeModal}>cancel</button>
+            <div className='form-btn' onClick={() => formik.submitForm()}>add item</div>
+            <div className='form-btn' onClick={closeModal}>cancel</div>
           </div>
         </form>
 
       </div>
-
-      {loading && <div className='loader-container'>
-        <Loader />
-      </div>}
-
     </div>
   )
 }

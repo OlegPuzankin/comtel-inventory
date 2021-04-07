@@ -1,6 +1,5 @@
 import { LocationDoc } from '../model/Location';
-import { FolderIcon } from './icons/folder-icon';
-import { PenIcon } from './icons/pen-icon';
+
 
 
 interface Props {

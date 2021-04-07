@@ -17,9 +17,10 @@
     grid-template-columns: minmax(200px, 2fr) repeat(4, minmax(100px, 1fr));
   }
 
-  // & > * {
-  //   border-right: 1px solid black;
-  // }
+  & > * {
+    display: flex;
+    align-items: center;
+  }
 
   .header {
     text-transform: uppercase;
@@ -30,23 +31,23 @@
     border-bottom: 1px solid $pr-punch;
   }
   .row {
-    padding: 0.2rem 0;
+    padding: 0.25rem 0;
     border-bottom: 1px solid $pr-warm;
     font-size: 0.9rem;
     &.selected {
       background-color: lighten($pr-ocean, 15);
     }
 
-    // &:hover {
-    //   background-color: lighten($pr-ocean, 30);
-    // }
+    & span.txt {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   .item {
     overflow: hidden;
     cursor: pointer;
-    display: flex;
-    align-items: center;
 
     &-img {
       margin-left: 1rem;
@@ -93,45 +94,22 @@
   }
 
   .sn {
-    // width: 150px;
-    display: flex;
-    align-items: center;
+    padding: 0 0.25rem;
     justify-content: center;
   }
 
   .location {
-    // width: 150px;
     padding: 0 0.25rem;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
     justify-content: center;
-
-    & .txt {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
   .responsible {
-    // width: 150px;
-
-    display: flex;
-    align-items: center;
+    padding: 0 0.25rem;
     justify-content: center;
   }
   .status {
-    // width: 120px;
-
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
   .date {
-    // width: 120px;
-
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
 }
@@ -140,7 +118,6 @@
   width: 1rem;
   height: 1rem;
   margin-left: 1rem;
-  // padding: 0.5rem;
   flex-shrink: 0;
 
   input[type='checkbox'] {

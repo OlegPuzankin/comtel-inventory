@@ -5,6 +5,8 @@ import { ItemDoc } from '../../model/Item';
 import { ItemImagePreview } from '../item-image-preview';
 import { FileIcon } from '../icons/file-icon';
 import { statusDic } from '../../utils/statusDictionary';
+import { df } from '../../utils/dateFormat';
+import { getItemText } from '../../utils/getItemText';
 
 
 interface Props {
@@ -12,10 +14,11 @@ interface Props {
   selected: boolean,
   handleCheckBox: (selected: boolean, item: ItemDoc) => void
   showCheckBox: boolean,
-  showModal: Function
+  showModal: Function,
+  showEditButton: Boolean
 }
 
-export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
+export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox, showModal, showEditButton }: Props) {
   const router = useRouter()
 
   function navigateToEditPage() {
@@ -43,8 +46,8 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
         }
 
         <span className='item-txt' >
-          {item.name}
-          {!selected && <div className='edit-btn'>
+          {getItemText(item)}
+          {!selected && showEditButton && <div className='edit-btn'>
             <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
           </div>}
         </span>
@@ -52,7 +55,9 @@ export function RowLocationTable({ item, selected, handleCheckBox, showCheckBox,
 
       <div className={cn('row responsible', { 'selected': selected })}>{item.responsiblePerson?.name}</div>
       <div className={cn('row status', { 'selected': selected })}>{statusDic[item.status]}</div>
-      <div className={cn('row date', { 'selected': selected })}>{new Date(item.timestamp).toLocaleDateString('en-GB')}</div>
+      <div className={cn('row date', { 'selected': selected })}>
+        {df(new Date(item.timestamp), "mediumDate")}
+      </div>
     </>
 
   )

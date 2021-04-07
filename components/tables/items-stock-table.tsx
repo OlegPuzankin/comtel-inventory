@@ -60,6 +60,7 @@ export function ItemsStockTable({ items }: Props) {
           showCheckBox={memoShowCheckBox}
           handleCheckBox={handleCheckBox}
           showModal={showModal}
+          showEditButton={Boolean(session?.user)}
           selected={selectedItems?.some(si => si._id === i._id)} />)}
 
       </div>

@@ -5,24 +5,21 @@ import cn from 'classnames'
 import { useRouter } from 'next/router'
 import { ItemImagePreview } from '../item-image-preview';
 import { getItemText } from '../../utils/getItemText';
+import { df } from '../../utils/dateFormat';
+// import dateFormat from 'dateformat'
 
 
-
-// const statusDic = {
-//   pending: 'Очікує видачі',
-//   onLocation: 'Видано',
-//   onStock: "Склад"
-// }
 
 interface Props {
   item: ItemDoc,
   selected: boolean,
   handleCheckBox: (selected: boolean, item: ItemDoc) => void
   showCheckBox: boolean,
-  showModal: Function
+  showModal: Function,
+  showEditButton: boolean
 }
 
-export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, showModal }: Props) {
+export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, showModal, showEditButton }: Props) {
 
   const router = useRouter()
 
@@ -30,6 +27,7 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
     router.push(`/item/${item._id}`)
   }
 
+  console.log(showEditButton);
 
   return (
     <>
@@ -55,7 +53,7 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
 
         <span className='item-txt'>
           {getItemText(item)}
-          {!selected && <div className='edit-btn'>
+          {!selected && showEditButton && <div className='edit-btn'>
             <button className='btn btn-navy' onClick={navigateToEditPage}>Edit</button>
           </div>}
         </span>
@@ -63,7 +61,7 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
 
       <div className={cn('row sn', { 'selected': selected })}>{item.serialNumber} </div>
       <div className={cn('row date', { 'selected': selected })}>
-        {new Date(item.timestamp).toLocaleDateString('en-GB')}
+        {df(new Date(item.timestamp), "mediumDate")}
       </div>
     </>
   )
