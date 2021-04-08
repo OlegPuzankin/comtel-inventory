@@ -4,7 +4,7 @@
 
   &-button {
     // min-width: 13ch;
-    min-height: 2.5rem;
+    // min-height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,16 +14,21 @@
     letter-spacing: 1px;
     font-weight: 600;
     background-color: $pr-navy;
-    border-radius: 5px;
-    padding: 0.3rem;
+    border-radius: 12px;
+    padding: 0.4rem;
     outline: none;
     border: none;
     color: #fff;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s ease-in-out;
 
     &:hover {
       background-color: darken($color: $pr-navy, $amount: 5);
+      box-shadow: rgb(0 0 0 / 20%) 0px 3px 20px 2px;
+
+      .arrows-icon {
+        background-color: darken($pr-punch, 5);
+      }
     }
 
     & .arrows-icon {
@@ -32,10 +37,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1rem;
-      height: 1.9rem;
+      width: 0.8rem;
+      height: 1.5rem;
       background-color: $pr-punch;
-      border-radius: 3px;
+      border-radius: 6px;
     }
 
     & .text {
