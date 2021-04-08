@@ -208,7 +208,7 @@ function EditItem() {
                   value: formik.values.type
                 }}
               />
-              <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>назад</button>
+              <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>back</button>
               <button className='btn btn-navy' type='submit'>update</button>
               <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>
 

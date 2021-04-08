@@ -24,23 +24,27 @@
   & .select.error {
     border: 1px solid rgb(255, 0, 0);
 
-    & + .label {
-      color: rgb(255, 0, 0);
-    }
+    // & + .label {
+    //   color: rgb(255, 0, 0);
+    // }
   }
 
   & .label {
     position: absolute;
     color: rgb(79, 83, 102);
-    left: 10px;
-    top: -10px;
-    background-color: #fff;
-    padding: 0 0.5em;
-    font-size: 0.8em;
+    left: 5px;
+    top: -15px;
+    // background-color: #fff;
+    padding: 0.2em 0.5em;
+    font-size: 0.7em;
     letter-spacing: 0.2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    color: #fff;
+    border-radius: 20px;
+    background-color: $gray-400;
   }
 
   & .error-text {

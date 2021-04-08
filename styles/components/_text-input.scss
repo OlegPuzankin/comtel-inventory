@@ -1,4 +1,4 @@
-@import "../base/colors";
+@import '../base/colors';
 
 .text-input-wrapper {
   position: relative;
@@ -25,23 +25,27 @@
   & .input.error {
     border: 1px solid $pr-punch;
 
-    & + .label {
-      color: $pr-punch;
-    }
+    // & + .label {
+    //   color: $pr-punch;
+    // }
   }
 
   & .label {
     position: absolute;
-    color: $gray-200;
-    left: 10px;
-    top: -10px;
-    background-color: #fff;
-    padding: 0 0.5em;
-    font-size: 0.8em;
+    color: rgb(79, 83, 102);
+    left: 5px;
+    top: -15px;
+    // background-color: #fff;
+    padding: 0.2em 0.5em;
+    font-size: 0.7em;
     letter-spacing: 0.2px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    color: #fff;
+    border-radius: 20px;
+    background-color: $gray-400;
   }
 
   & .error-text {

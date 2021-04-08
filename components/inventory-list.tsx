@@ -14,17 +14,22 @@ import { ItemsAllToolsTable } from './tables/items-all-tools-table';
 import { statusDic } from '../utils/statusDictionary';
 import { ItemsStockTable } from './tables/items-stock-table';
 import { Loader } from './loader';
+import { TextInput } from './ui/text-input';
 
 
 
 export function InventoryList() {
   const { data: locations } = useGetLocations()
   const { data: items, mutate: mutateItems } = useGetItems()
+  const { data: users } = useGetUsers()
+
   const { showModal, clearSelectedItems } = useActions()
   const { location: selectedLocation, selectedItems } = useTypedSelector(state => state.main)
   const [session] = useSession();
-  const { data: users } = useGetUsers()
   const [loading, setLoading] = React.useState(false)
+
+  const [searchString, setSearchString] = React.useState('')
+
 
   async function moveItems(selectedItems: Array<ItemDoc>, locationId: string) {
     setLoading(true)
@@ -117,6 +122,11 @@ export function InventoryList() {
       .filter(item => {
         return item.location._id === selectedLocation._id
       })
+      .filter(item => {
+        return (
+          item.name.toLowerCase().includes(searchString.toLowerCase())
+        )
+      })
   }
   function showMoveButton() {
     //@ts-ignore
@@ -152,6 +162,11 @@ export function InventoryList() {
       return `${selectedLocation?.locationType}: ${selectedLocation?.name}`
   }
 
+  React.useEffect(() => {
+    filterItemsByLocation()
+  }, [searchString])
+
+
   return (
     <div className='inventory-list'>
       <div className='inventory-list-top-row'>
@@ -186,6 +201,17 @@ export function InventoryList() {
 
 
       </div>
+
+      {selectedLocation &&
+        <div className='search'>
+          <TextInput
+            label={`find by name`}
+            inputProps={{
+              onChange: e => setSearchString(e.target.value),
+              value: searchString,
+            }} />
+        </div>
+      }
 
       {selectedLocation?.locationType === 'location' && <ItemsLocationTable items={filterItemsByLocation()} />}
       {selectedLocation?.locationType === 'stock' && <ItemsStockTable items={filterItemsByLocation()} />}
