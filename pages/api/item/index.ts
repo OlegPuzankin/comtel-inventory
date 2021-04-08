@@ -14,7 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     case 'GET':
       try {
 
-        const items = await Item.find({}).populate('location').populate('responsiblePerson')
+        const items = await Item.find({})
+          .populate('location')
+          .populate('responsiblePerson')
+          .sort({ name: 1 })
         res.status(200).json({ success: true, data: items })
       } catch (error) {
         console.log('get items error-->', error)
