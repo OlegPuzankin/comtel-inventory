@@ -17,7 +17,8 @@ export interface ItemDoc extends mongoose.Document {
   serialNumber: string,
   desc: string,
   type: ItemType,
-  timestamp: Date
+  timestamp: Date,
+  createdBy: string
 
 }
 
@@ -57,6 +58,9 @@ const itemSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
+  createdBy: {
+    type: String,
+  }
 })
 
 

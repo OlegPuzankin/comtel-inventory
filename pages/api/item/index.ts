@@ -34,7 +34,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             name: body.name,
             imageKey: body.imageKey,
             location: body.location,
-            type: body.type
+            type: body.type,
+            createdBy: body.createdBy
           })
         await item.save()
         res.status(201).json({ success: true, data: item })

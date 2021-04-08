@@ -12,6 +12,7 @@ import { measureUnits } from '../utils/measureUnits';
 import { useActions } from '../hooks/useActions';
 import { itemTypes } from '../utils/itemsType';
 import { LoaderLinear } from './loader-linear';
+import { useSession } from 'next-auth/client';
 
 interface Props {
   data: Array<LocationDoc>
@@ -23,6 +24,7 @@ export function ModalAddItem({ data }: Props) {
 
   const [loading, setLoading] = React.useState(false)
   const [image, setImage] = React.useState<File>(null)
+  const [session] = useSession()
   // const location = useTypedSelector(state => state.main.location)
 
   const formik = useFormik({
@@ -38,15 +40,9 @@ export function ModalAddItem({ data }: Props) {
     }),
     onSubmit: async (values) => {
       setLoading(true)
-
       try {
-        let imageUploadResponse = null
-        if (image) {
-          imageUploadResponse = await loadImage(image)
-          if (imageUploadResponse.status === 200)
-            console.log('image was uploaded');
-        }
-        const response = await axios.post('/api/item', { ...values, imageKey: imageUploadResponse?.key })
+        console.log(session.user.email);
+        const response = await axios.post('/api/item', { ...values, createdBy: session?.user.email })
         if (response.status === 201) {
           formik.setFieldValue('name', '')
           setImage(null)

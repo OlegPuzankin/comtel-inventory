@@ -12,7 +12,7 @@ import { ItemDoc } from '../../model/Item';
 import { loadImage } from '../../utils/loadImage';
 import { Loader } from '../../components/loader';
 import { ImageUploadInput } from '../../components/ui/image-upload-input';
-import { getSession } from 'next-auth/client';
+import { getSession, useSession } from 'next-auth/client';
 import { GetItemResponse, PutItemResponse } from '../../interfaces/api_response';
 import { measureUnits } from '../../utils/measureUnits';
 import { itemTypes } from '../../utils/itemsType';
@@ -25,6 +25,8 @@ function EditItem() {
   const [msg, setMsg] = React.useState('')
   const [item, setItem] = React.useState<ItemDoc>(null)
   const [image, setImage] = React.useState<File>(null)
+  const [session] = useSession();
+
 
   const router = useRouter()
   const { mutate: mutateItems } = useGetItems()
@@ -81,7 +83,8 @@ function EditItem() {
           if (imageUploadResponse.status === 200)
             console.log('image was uploaded');
         }
-        const { data } = await axios.put<PutItemResponse>(`/api/item/${item._id}`, { ...values, imageKey: imageUploadResponse?.key })
+        const { data } = await axios.put<PutItemResponse>(`/api/item/${item._id}`,
+          { ...values, imageKey: imageUploadResponse?.key, createdBy: session.user.email })
         mutateItems()
         setLoading(false)
         setMsg('Item Updated')
@@ -210,7 +213,8 @@ function EditItem() {
               />
               <button className='btn btn-ocean' type='button' onClick={() => router.push('/')}>back</button>
               <button className='btn btn-navy' type='submit'>update</button>
-              <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>
+
+              {(session?.user.admin || session?.user.email === item.createdBy) && <button className='btn btn-punch' type='button' onClick={deleteItem}>delete</button>}
 
             </div>
           </div>

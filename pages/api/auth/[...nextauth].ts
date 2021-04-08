@@ -3,10 +3,7 @@ import NextAuth, { InitOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
 import { User } from '../../../model/User';
 import dbConnect from '../../../utils/dbConnect';
-const allowedEmails = [
-  'oleg.puzankin@gmail.com',
-  'sah4etv@gmail.com',
-]
+
 function checkAllowedEmails(email: string) {
   if (/@comtel.ua$/.test(email) || /@rfs.kiev.ua$/.test(email)) {
     console.log('comtel.ua or rfs.kiev.ua domain email');
@@ -16,6 +13,7 @@ function checkAllowedEmails(email: string) {
   const allowedEmails = [
     'oleg.puzankin@gmail.com',
     'sah4etv@gmail.com',
+    'iryna.bright@gmail.com'
   ]
 
   if (allowedEmails.includes(email)) {
@@ -61,7 +59,6 @@ const options: InitOptions = {
     async session(session, user) {
       await dbConnect()
       const _user = await User.findOne({ email: user.email })
-      //@ts-ignore
       session.user.admin = _user.admin
       return session
     },
