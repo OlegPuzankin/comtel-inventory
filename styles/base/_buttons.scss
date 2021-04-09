@@ -60,3 +60,11 @@
     background-color: darken($color: $pr-ocean, $amount: 5);
   }
 }
+
+.btn-rounded {
+  border-radius: 50px;
+}
+
+.btn-shadow:hover {
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 8px 2px;
+}

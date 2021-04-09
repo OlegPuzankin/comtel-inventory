@@ -53,13 +53,13 @@ export function ItemsLocationTable({ items }: Props) {
                 onChange={toggleCheckbox} />
             </div>
           }
-          <span className='item-txt'>Name</span>
+          <span className='item-txt'>Назва</span>
 
         </div>
         {/* <div className='sn flex-20'>Serial number</div> */}
-        <div className='responsible header'>Responsible</div>
-        <div className='status header'>Status</div>
-        <div className='date header'>Date</div>
+        <div className='responsible header'>Відп. особа</div>
+        <div className='status header'>Статус</div>
+        <div className='date header'>Дата</div>
 
         {items?.map(i => <RowLocationTable
           key={i._id}

@@ -3,10 +3,8 @@ import React from 'react';
 import { TextInput } from './ui/text-input';
 import * as Yup from "yup";
 import axios from 'axios';
-import cn from 'classnames'
 import useSWR, { trigger, mutate } from 'swr';
 import { useGetItems, useGetLocations, useGetUsers } from '../hooks/swr';
-import { Select } from './ui/select';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
 import { LocationDoc } from '../model/Location';
@@ -114,7 +112,7 @@ export function ModalLocation() {
 
         <form onSubmit={formik.handleSubmit} className='form'>
           <div className='fields'>
-            <div className="grid-col-2">
+            <div className="grid-col-3">
               <TextInput
                 label={`location's name`}
 
@@ -128,7 +126,7 @@ export function ModalLocation() {
                 }} />
             </div>
 
-            <Select
+            {/* <Select
               label='location type'
               error={formik.touched.locationType && formik.errors.locationType}
               items={locationTypes.map((l) => ({ value: l, displayText: l }))}
@@ -138,7 +136,7 @@ export function ModalLocation() {
                 name: 'locationType',
                 value: formik.values.locationType
               }}
-            />
+            /> */}
           </div>
 
           <div className='form-buttons'>
@@ -161,6 +159,6 @@ export function ModalLocation() {
       {/* {loading && <div className='loader-container'>
         <Loader />
       </div>} */}
-    </div>
+    </div >
   )
 }

@@ -48,11 +48,11 @@ export function ItemsStockTable({ items }: Props) {
               checked={checked}
               onChange={toggleCheckbox} />
           </div>}
-          <span className='item-txt'>Name</span>
+          <span className='item-txt'>Назва</span>
         </div>
 
-        <div className='sn header'>Serial number</div>
-        <div className='date header'>Date</div>
+        <div className='sn header'>Серійний номер</div>
+        <div className='date header'>Дата</div>
 
         {items?.map(i => <RowStockTable
           key={i._id}

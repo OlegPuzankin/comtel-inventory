@@ -157,9 +157,10 @@ export function InventoryList() {
   }
   function getLocatioName() {
     if (!selectedLocation)
-      return 'All tools'
+      return 'Всі інструменти'
     else
-      return `${selectedLocation?.locationType}: ${selectedLocation?.name}`
+      return `${selectedLocation?.name}`
+    // return `${selectedLocation?.locationType}: ${selectedLocation?.name}`
   }
 
   React.useEffect(() => {

@@ -31,7 +31,7 @@ export function LocationsList() {
         <div
           onClick={() => setLocation(null)}
           className={cn('all-tools location-item', { 'location-item-selected': !selectedLocation })}>
-          <span>all tools</span>
+          <span>Всі інструменти</span>
           <span className='countItems'>{items?.data.filter(i => i.type === ItemType.Tool).length}</span>
         </div>
 

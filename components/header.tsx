@@ -30,12 +30,12 @@ const Header = () => {
 
           <div className='auth'>
             {!session && (
-              <button onClick={() => signIn('google')} className="btn btn-punch">
+              <button onClick={() => signIn('google')} className="btn btn-punch btn-rounded btn-shadow">
                 <div className='sign-with-google'>
                   <div className='google-icon'>
                     <GoogleIcon />
                   </div>
-                  <span>Sign with Google</span>
+                  <span>Увійти</span>
                 </div>
               </button>
             )}
@@ -49,7 +49,7 @@ const Header = () => {
 
                 <span className="email">{session.user.email}</span>
 
-                <button className="btn btn-ocean" onClick={signOut}>Sign out</button>
+                <button className="btn btn-ocean btn-rounded btn-shadow" onClick={signOut}>Вийти</button>
 
               </div>
             )}

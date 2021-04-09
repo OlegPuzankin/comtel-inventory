@@ -11,11 +11,11 @@ ul {
 ul {
   list-style: none;
 }
-html {
-  @include respond(medium) {
-    font-size: 12px;
-  }
-}
+// html {
+//   @include respond(medium) {
+//     font-size: 12px;
+//   }
+// }
 
 // body {
 //   background-color: hsl(0, 0%, 90%);

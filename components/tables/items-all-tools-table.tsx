@@ -16,12 +16,12 @@ export function ItemsAllToolsTable({ items }: Props) {
     <div className='table-wrapper'>
       <div className='table-grid'>
         <div className='item header'>
-          <span className='item-txt'>Name</span>
+          <span className='item-txt'>Назва</span>
         </div>
-        <div className='sn header'>Serial number</div>
-        <div className='location header'>Location</div>
-        <div className='responsible header'>Responsible</div>
-        <div className='status header'>Status</div>
+        <div className='sn header'>Серійний номер</div>
+        <div className='location header'>Локація</div>
+        <div className='responsible header'>Відп. особа</div>
+        <div className='status header'>Статус</div>
 
         {items?.map(i => <RowAllToolsTable
           key={i._id}
