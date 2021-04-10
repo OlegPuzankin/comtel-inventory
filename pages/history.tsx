@@ -3,10 +3,17 @@ import Layout from '../components/layout'
 import { Loader } from '../components/loader'
 import { TextInput } from '../components/ui/text-input'
 import { useGetHistory } from '../hooks/swr'
+import { useScrollPosition } from '../hooks/useScrollPosition'
+
 
 function History() {
   const { data: histories } = useGetHistory()
   const [searchString, setSearchString] = React.useState('')
+  // const [divPosition, setDivPosition] = React.useState(100)
+
+  // useScrollPosition(({ prevPosition, currentPosition }) => {
+  //   setDivPosition(Math.abs(currentPosition.y) + 50)
+  // }, [], null, false, 25)
 
 
   if (!histories) {
@@ -21,6 +28,7 @@ function History() {
   return (
     <Layout title='History' >
       <div className="container">
+        {/* <div className='floating' style={{ top: `${divPosition}px` }}>Test</div> */}
 
         <div className="search-input">
           <TextInput

@@ -1,8 +1,6 @@
 .container {
   width: 95%;
-  // min-width: 980px;
   margin: 0 auto;
-  // min-height: 100vh;
 }
 
 .search-input {
@@ -13,4 +11,13 @@
 .history-entry {
   padding: 0.5rem 0;
   border-bottom: 1px solid $pr-ocean;
+}
+
+.floating {
+  position: absolute;
+  // top: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transition: all 0.2s;
 }

@@ -27,7 +27,6 @@ export function RowStockTable({ item, selected, handleCheckBox, showCheckBox, sh
     router.push(`/item/${item._id}`)
   }
 
-  console.log(showEditButton);
 
   return (
     <>
