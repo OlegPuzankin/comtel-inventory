@@ -3,8 +3,6 @@
 .text-input-wrapper {
   position: relative;
   margin-top: 1rem;
-  // display: inline-block;
-  // width: 250px;
 
   & .input {
     width: 100%;
@@ -24,10 +22,6 @@
 
   & .input.error {
     border: 1px solid $pr-punch;
-
-    // & + .label {
-    //   color: $pr-punch;
-    // }
   }
 
   & .label {
@@ -35,7 +29,6 @@
     color: rgb(79, 83, 102);
     left: 5px;
     top: -15px;
-    // background-color: #fff;
     padding: 0.2em 0.5em;
     font-size: 0.7em;
     letter-spacing: 0.2px;

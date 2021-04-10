@@ -14,7 +14,6 @@ const Header = () => {
   // }
 
 
-
   function signOut() {
     signout()
   }
@@ -29,7 +28,8 @@ const Header = () => {
           </Link>
 
           <div className='auth'>
-            {!session && (
+            {!session
+              ?
               <button onClick={() => signIn('google')} className="btn btn-punch btn-rounded btn-shadow">
                 <div className='sign-with-google'>
                   <div className='google-icon'>
@@ -38,21 +38,16 @@ const Header = () => {
                   <span>Увійти</span>
                 </div>
               </button>
-            )}
-            {session && (
-              <div className='profile'>
 
+              : <div className='profile'>
                 <span
                   style={{ backgroundImage: `url(${session.user.image})` }}
                   className="avatar"
                 />
-
                 <span className="email">{session.user.email}</span>
-
                 <button className="btn btn-ocean btn-rounded btn-shadow" onClick={signOut}>Вийти</button>
-
               </div>
-            )}
+            }
           </div>
           <div className='toggle-menu-button' onClick={() => setShowSideMenu(!showSideMenu)}>
             <ToggleMenuIcon />
@@ -61,6 +56,18 @@ const Header = () => {
       </header>
       <div className={cn('toggle-menu', { 'toggle-menu-show': showSideMenu })} onClick={() => setShowSideMenu(false)}>
         <LocationsList />
+
+        {!session
+          ? <button onClick={() => signIn('google')} className="btn btn-punch btn-rounded btn-shadow m-1">
+            <div className='sign-with-google'>
+              <div className='google-icon'>
+                <GoogleIcon />
+              </div>
+              <span>Увійти</span>
+            </div>
+          </button>
+          : <button className="btn btn-punch btn-rounded btn-shadow m-1" onClick={signOut}>Вийти</button>
+        }
       </div>
     </>
 

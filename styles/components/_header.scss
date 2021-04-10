@@ -51,7 +51,6 @@ nav {
 .email {
   margin-right: 1rem;
   margin-left: 0.25rem;
-  // font-weight: 400;
   font-size: 0.8rem;
 }
 
@@ -83,11 +82,10 @@ nav {
   position: fixed;
   color: #fff;
   min-width: 250px;
-  height: 100vh;
-  // top: 0;
-  // right: 0;
+  // height: 90vh;
   left: -100%;
-  // bottom: 0;
+  top: 57px;
+  bottom: 0;
   background-color: $pr-ocean;
   z-index: 100;
   transition: all 0.2s;
@@ -98,6 +96,9 @@ nav {
   }
 
   @include respond(medium) {
-    display: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    // align-items: center;
   }
 }

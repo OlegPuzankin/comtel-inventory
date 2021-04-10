@@ -35,8 +35,8 @@ export function ModalAddItem({ data }: Props) {
       measure: ''
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("Field can not be empty"),
-      location: Yup.string().required("Select can not be empty"),
+      name: Yup.string().required("Item\'s name can not be empty"),
+      location: Yup.string().required("Location can not be empty"),
     }),
     onSubmit: async (values) => {
       setLoading(true)

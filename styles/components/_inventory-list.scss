@@ -7,6 +7,9 @@
 
   .search {
     width: 25%;
+    @include respond(medium) {
+      width: 100%;
+    }
   }
 
   &-top-row {
