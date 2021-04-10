@@ -138,9 +138,12 @@ export function InventoryList() {
     }
   }
   function showEditLocationButton() {
+
     if (!session)
       return false
     else if (!selectedLocation)
+      return false
+    else if (selectedLocation.locationType === LocationType.Stock)
       return false
     else
       return true

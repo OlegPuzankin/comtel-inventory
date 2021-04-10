@@ -54,6 +54,7 @@ const Header = () => {
           </div>
         </nav>
       </header>
+      {/* toggle-menu for mobile devices */}
       <div className={cn('toggle-menu', { 'toggle-menu-show': showSideMenu })} onClick={() => setShowSideMenu(false)}>
         <LocationsList />
 
@@ -69,6 +70,7 @@ const Header = () => {
           : <button className="btn btn-punch btn-rounded btn-shadow m-1" onClick={signOut}>Вийти</button>
         }
       </div>
+      {showSideMenu && <div className='toggle-menu-backdrop' />}
     </>
 
   );
