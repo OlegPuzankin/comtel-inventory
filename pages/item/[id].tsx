@@ -140,6 +140,7 @@ function EditItem() {
       <div className='edit-item'>
         {loading && <div className='loader-linear-container'> <LoaderLinear /></div>}
         {msg && <div className='msg' onClick={() => setMsg('')}>{msg}</div>}
+        <h5 className='edit-item-heading'>Edit item {item.name}</h5>
 
         <form onSubmit={formik.handleSubmit} className='edit-item-form'>
           <div className='left-side'>
