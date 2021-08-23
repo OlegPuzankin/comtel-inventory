@@ -15,6 +15,11 @@
     &:hover {
       border: 1px solid $gray-200;
     }
+
+    @include respond(medium) {
+      width: 280px;
+      height: 280px;
+    }
   }
   &-input {
     background-color: $gray-800;

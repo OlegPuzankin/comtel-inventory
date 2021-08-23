@@ -1,14 +1,16 @@
 import React from 'react';
 import { MenuItem } from '../../interfaces/common_interfaces';
+import cn from 'classnames'
 
 interface Props {
   buttonText?: string
   menuItems: Array<MenuItem>,
+  menuRight?: boolean
 }
 
 
 
-export function DropDown({ menuItems, buttonText }: Props) {
+export function DropDown({ menuItems, buttonText, menuRight = false }: Props) {
 
   return (
     <div className="drop-down">
@@ -22,7 +24,7 @@ export function DropDown({ menuItems, buttonText }: Props) {
         </div>
 
       </button>
-      <ul className='drop-down-menu' >
+      <ul className={cn('drop-down-menu', { 'drop-down-menu--right': menuRight })} >
         {menuItems?.map(mi => {
           return (<li
             key={mi.id}

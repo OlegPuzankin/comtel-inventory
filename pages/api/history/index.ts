@@ -2,8 +2,6 @@ import dbConnect from '../../../utils/dbConnect'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { History } from '../../../model/History';
 
-
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // const { body } = req
   await dbConnect()

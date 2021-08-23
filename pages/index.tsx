@@ -50,28 +50,3 @@ export default function Home() {
   )
 }
 
-// || window === 'edit-location'
-
-// export const getServerSideProps: GetServerSideProps = async ({ req, res, params }) => {
-
-//   const session = await getSession({ req })
-
-//   // ('session=>', session);
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: '/auth',
-//         permanent: false,
-//       },
-//     }
-//   }
-
-
-
-//   return {
-//     props: {
-//       item: "foo",
-//     }
-//   }
-// }

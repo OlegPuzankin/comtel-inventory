@@ -26,6 +26,9 @@
     display: grid;
     grid-template-columns: 6fr 4fr;
     gap: 1rem;
+    @include respond(medium) {
+      grid-template-columns: 1fr;
+    }
   }
   .sub-grid {
     display: inline-grid;

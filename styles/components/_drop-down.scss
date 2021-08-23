@@ -70,15 +70,15 @@
     border-radius: 5px;
     background-color: white;
     box-shadow: rgb(0 0 0 / 20%) 0px 3px 8px 2px;
-
     position: absolute;
-    // left: 0;
-    // top: 0;
     opacity: 0;
     visibility: hidden;
-    // pointer-events: none;
     transform: translateY(10px);
     transition: all 0.4s ease;
+
+    &--right {
+      right: 0;
+    }
 
     &--item {
       width: 100%;
@@ -93,10 +93,5 @@
         background-color: $gray-700;
       }
     }
-
-    // &--item a {
-    //   display: block;
-
-    // }
   }
 }

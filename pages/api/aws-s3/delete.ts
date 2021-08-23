@@ -27,10 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }, async function (err, data) {
     if (err) console.log(err, err.stack);
     else {
-
       const item = await Item.findByIdAndUpdate(query.id, { imageKey: undefined })
-
-
       res.status(200).json({ success: true, data })
     }
   })

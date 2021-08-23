@@ -198,6 +198,7 @@ export function InventoryList() {
 
         {session && <div className='add-new-btn'>
           <DropDown
+            menuRight={true}
             buttonText='Add new'
             menuItems={addNewMenuItems()}
           />

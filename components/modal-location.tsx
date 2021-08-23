@@ -7,10 +7,8 @@ import useSWR, { trigger, mutate } from 'swr';
 import { useGetItems, useGetLocations, useGetUsers } from '../hooks/swr';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
-import { LocationDoc } from '../model/Location';
 import { PutLocationResponse } from '../interfaces/api_response';
 import { getCountItems } from '../utils/getCountItems';
-import { Loader } from './loader';
 import { LocationType } from '../interfaces/common_interfaces';
 import { LoaderLinear } from './loader-linear';
 
@@ -40,7 +38,7 @@ export function ModalLocation() {
       try {
         // add new location
         if (window === 'location') {
-          const response = await axios.post('/api/location', values)
+          const response = await axios.post('/api/location', { name: values.name, locationType: LocationType.Location })
 
           if (response.status === 201) {
             setLoading(false)
@@ -96,6 +94,9 @@ export function ModalLocation() {
       formik.setValues({ name: location.name, locationType: location.locationType })
   }, [window])
 
+  // console.log(formik.values);
+  console.log('window-->', window);
+
   return (
     <div className='modal-backdrop'>
       <div className='modal'>
@@ -126,17 +127,6 @@ export function ModalLocation() {
                 }} />
             </div>
 
-            {/* <Select
-              label='location type'
-              error={formik.touched.locationType && formik.errors.locationType}
-              items={locationTypes.map((l) => ({ value: l, displayText: l }))}
-              selectProps={{
-                onChange: formik.handleChange,
-                onBlur: formik.handleBlur,
-                name: 'locationType',
-                value: formik.values.locationType
-              }}
-            /> */}
           </div>
 
           <div className='form-buttons'>
