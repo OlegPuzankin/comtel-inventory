@@ -94,8 +94,6 @@ export function ModalLocation() {
       formik.setValues({ name: location.name, locationType: location.locationType })
   }, [window])
 
-  // console.log(formik.values);
-  console.log('window-->', window);
 
   return (
     <div className='modal-backdrop'>

@@ -14,7 +14,6 @@
     "classnames": "^2.2.6",
     "dateformat": "^4.5.1",
     "formik": "^2.2.6",
-    "immer": "^9.0.5",
     "mongoose": "5.9.13",
     "next": "10.0.7",
     "next-auth": "^3.5.0",

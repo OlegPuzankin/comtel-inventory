@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method, body } = req
-  console.log('body request', body);
 
   await dbConnect()
   switch (method) {

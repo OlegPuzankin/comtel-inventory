@@ -1,6 +1,5 @@
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
-import produce from 'immer'
 
 interface UIState {
   show: boolean;
@@ -13,23 +12,23 @@ const initialState = {
   window: null,
 };
 
-const reducer = produce((
+const reducer = (
   state: UIState = initialState,
   action: Action
 ): UIState => {
   switch (action.type) {
     case ActionType.SHOW_MODAL:
-      state.show = true
-      state.window = action.payload
-      return state
+      // state.show = true
+      // state.window = action.payload
+      return { show: true, window: action.payload }
     case ActionType.CLOSE_MODAL:
       state.show = false
       state.window = null
-      return state
+      return { show: false, window: null }
 
     default:
       return state;
   }
-});
+};
 
 export default reducer;
